@@ -13,6 +13,13 @@ class FitnessActivityController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+        $profile = $user->profile;
+
+        if (!$profile) {
+            return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
+        }
+        
         $today = Carbon::today()->toDateString();
         $dailyLog = DailyLog::firstOrCreate(['user_id' => Auth::id(), 'date' => $today]);
         

@@ -13,6 +13,11 @@ class ReportController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $profile = $user->profile;
+
+        if (!$profile) {
+            return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
+        }
 
         $pastSevenDays = DailyLog::where('user_id', $user->id)
             ->where('date', '>=', Carbon::now()->subDays(6)->toDateString())
