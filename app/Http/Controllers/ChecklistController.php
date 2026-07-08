@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DailyLog;
+use App\Models\MealLog;
+use App\Models\PlanDay;
 use App\Services\RewardStreakService;
 use Carbon\Carbon;
 
@@ -13,23 +15,49 @@ class ChecklistController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $profile = $user->profile;
-
-        if (!$profile) {
-            return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
-        }
-
         $today = Carbon::today()->toDateString();
+
         $dailyLog = DailyLog::firstOrCreate(['user_id' => $user->id, 'date' => $today]);
 
-        $hasMeals = $dailyLog->mealLogs()->count() > 0;
-        $hasWater = $dailyLog->water_intake_ml >= 2000;
-        $hasExercise = $dailyLog->exerciseLogs()->count() > 0;
+        $breakfastDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'breakfast')->where('status', 'completed')->exists();
+        $lunchDone     = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'lunch')->where('status', 'completed')->exists();
+        $dinnerDone    = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'dinner')->where('status', 'completed')->exists();
+        $snacksDone    = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'snacks')->where('status', 'completed')->exists();
 
-        $totalPoints = $user->rewardPoints()->sum('points');
-        $streak = $user->streak;
+        $waterGoal = 3000;
+        if ($user->active_plan_id) {
+            $currentDayPlan = PlanDay::where('plan_id', $user->active_plan_id)
+                ->where('day_number', $user->current_plan_day_number)
+                ->first();
+            if ($currentDayPlan) {
+                $waterGoal = $currentDayPlan->water_goal_ml;
+            }
+        }
 
-        return view('checklist.index', compact('dailyLog', 'hasMeals', 'hasWater', 'hasExercise', 'totalPoints', 'streak'));
+        $rewardPoints = 0;
+        if ($user->rewardPoints) {
+            foreach ($user->rewardPoints as $rewardPoint) {
+                $rewardPoints += $rewardPoint->points;
+            }
+        }
+
+        $waterDone = $dailyLog->water_intake_ml >= $waterGoal;
+
+        $exerciseDone = $dailyLog->total_calories_burn > 0;
+        $sleepDone    = $dailyLog->sleep_hours >= 7;
+
+        return view('checklist.index', compact(
+            'dailyLog',
+            'breakfastDone',
+            'lunchDone',
+            'dinnerDone',
+            'snacksDone',
+            'waterDone',
+            'exerciseDone',
+            'sleepDone',
+            'user',
+            'rewardPoints'
+        ));
     }
 
     public function completeDay()
@@ -39,13 +67,13 @@ class ChecklistController extends Controller
         $dailyLog = DailyLog::where('user_id', $user->id)->where('date', $today)->firstOrFail();
 
         if ($dailyLog->is_completed) {
-            return redirect()->back()->with('info', 'You have already completed your day!');
+            return redirect()->back()->with('info', 'You have already finalized and completed this day!');
         }
 
         $dailyLog->update(['is_completed' => true]);
 
-        \App\Services\RewardStreakService::awardPoints($user, 20, 'Completed Day Checklist');
-        \App\Services\RewardStreakService::updateStreak($user);
+        RewardStreakService::awardPoints($user, 'complete_day');
+        RewardStreakService::updateStreak($user);
 
         if ($user->active_plan_id) {
             $activePlan = $user->activePlan;
@@ -53,15 +81,15 @@ class ChecklistController extends Controller
             if ($user->current_plan_day_number < $activePlan->duration_days) {
                 $user->increment('current_plan_day_number');
             } else {
-                \App\Services\RewardStreakService::awardPoints($user, 500, 'Completed Full Plan Challenge');
+                RewardStreakService::awardPoints($user, 'complete_plan');
                 $user->update([
                     'active_plan_id' => null,
                     'current_plan_day_number' => 1
                 ]);
-                return redirect()->route('plans.index')->with('success', '🎉 CONGRATULATIONS! You completed the entire plan! +500 Bonus Points Awarded!');
+                return redirect()->route('plans.index')->with('success', '🎉 AMAZING! You have completed the entire multi-day diet blueprint! +500 Bonus Points Logged!');
             }
         }
 
-        return redirect()->back()->with('success', '🎉 Day Completed! +20 Points. Your plan has advanced to the next day!');
+        return redirect()->back()->with('success', '🎉 Day Finalized! +20 Points secured and your active plan has advanced to the next checkpoint!');
     }
 }

@@ -19,8 +19,15 @@ class PlanDay extends Model
         'notes'
     ];
 
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
+
     public function planFoods()
     {
         return $this->hasMany(PlanDayFood::class, 'plan_day_id');
     }
+
+    
 }

@@ -17,40 +17,64 @@ class PlansTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
+
             ->columns([
                 TextColumn::make('name')
                     ->label('Plan Name')
                     ->searchable()
+                    ->sortable()
+                    ->weight('bold'),
+
+                TextColumn::make('days_count')
+                    ->label('Days')
+                    ->counts('days')
+                    ->badge()
                     ->sortable(),
 
                 TextColumn::make('duration_days')
-                    ->label('Duration (Days)')
+                    ->label('Duration')
+                    ->suffix(' Days')
+                    ->badge()
                     ->sortable(),
 
                 TextColumn::make('plan_type')
                     ->label('Plan Type')
                     ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'default' => 'success',
+                        'custom' => 'warning',
+                        default => 'gray',
+                    })
                     ->sortable(),
 
                 IconColumn::make('is_active')
                     ->label('Active')
-                    ->boolean(),
+                    ->boolean()
+                    ->alignCenter(),
+
+                TextColumn::make('description')
+                    ->label('Description')
+                    ->limit(40)
+                    ->tooltip(fn ($record) => $record->description)
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('created_at')
                     ->label('Created')
-                    ->dateTime('d M Y')
+                    ->since()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
 
                 TextColumn::make('updated_at')
                     ->label('Updated')
-                    ->dateTime('d M Y')
+                    ->since()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+
             ->filters([
                 TernaryFilter::make('is_active')
-                    ->label('Active'),
+                    ->label('Status'),
 
                 SelectFilter::make('plan_type')
                     ->label('Plan Type')
@@ -59,10 +83,12 @@ class PlansTable
                         'custom' => 'Custom (User)',
                     ]),
             ])
+
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
             ])
+
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

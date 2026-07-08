@@ -12,16 +12,19 @@
                 <div
                     class="bg-gradient-to-br from-yellow-400 to-orange-500 p-6 rounded-2xl shadow-md text-white text-center">
                     <p class="text-xs uppercase font-extrabold tracking-wider opacity-90">Total Reward Points</p>
-                    <h3 class="text-4xl font-black mt-2">⭐ {{ $totalPoints }}</h3>
+                    <h3 class="text-4xl font-black mt-2">⭐ {{ $rewardPoints }}</h3>
                     <p class="text-xs mt-2 bg-black bg-opacity-10 inline-block px-3 py-1 rounded-full">Future Gifts
                         Locked 🔒</p>
                 </div>
 
                 <div class="bg-gray-900 p-6 rounded-2xl shadow-md text-white text-center">
                     <p class="text-xs uppercase font-extrabold tracking-wider text-orange-400">🔥 Current Streak</p>
-                    <h3 class="text-4xl font-black mt-2">{{ $streak?->current_streak ?? 0 }} <span
-                            class="text-lg font-normal text-gray-400">Days</span></h3>
-                    <p class="text-xs text-gray-400 mt-2">Personal Best: {{ $streak?->longest_streak ?? 0 }} Days</p>
+                    <h3 class="text-4xl font-black mt-2">
+                        {{ $user->streak?->current_streak ?? 0 }}
+                        <span class="text-lg font-normal text-gray-400">Days</span>
+                    </h3>
+                    <p class="text-xs text-gray-400 mt-2">Personal Best: {{ $user->streak?->longest_streak ?? 0 }} Days
+                    </p>
                 </div>
             </div>
 
@@ -41,7 +44,7 @@
                                     <p class="text-xs text-gray-400">Add breakfast, lunch, or dinner</p>
                                 </div>
                             </div>
-                            <span>{!! $hasMeals ? '✅' : '❌' !!}</span>
+                            <span>{!! $breakfastDone || $lunchDone || $dinnerDone || $snacksDone ? '✅' : '❌' !!}</span>
                         </div>
 
                         <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
@@ -49,11 +52,11 @@
                                 <span class="text-xl">💧</span>
                                 <div>
                                     <p class="font-bold text-gray-700 text-sm">Hydration Goal</p>
-                                    <p class="text-xs text-gray-400">Drink minimum 2000ml (Current:
+                                    <p class="text-xs text-gray-400">Drink minimum target (Current:
                                         {{ $dailyLog->water_intake_ml }}ml)</p>
                                 </div>
                             </div>
-                            <span>{!! $hasWater ? '✅' : '❌' !!}</span>
+                            <span>{!! $waterDone ? '✅' : '❌' !!}</span>
                         </div>
 
                         <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
@@ -61,10 +64,11 @@
                                 <span class="text-xl">🏃‍♂️</span>
                                 <div>
                                     <p class="font-bold text-gray-700 text-sm">Physical Activity</p>
-                                    <p class="text-xs text-gray-400">Log at least one physical workout</p>
+                                    <p class="text-xs text-gray-400">Log at least one physical workout (Burned:
+                                        {{ $dailyLog->total_calories_burn ?? 0 }} kcal)</p>
                                 </div>
                             </div>
-                            <span>{!! $hasExercise ? '✅' : '❌' !!}</span>
+                            <span>{!! $exerciseDone ? '✅' : '❌' !!}</span>
                         </div>
                     </div>
                 </div>
