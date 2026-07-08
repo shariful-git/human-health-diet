@@ -21,8 +21,10 @@ return new class extends Migration
             $table->decimal('fat', 5, 2)->default(0);
             $table->decimal('fiber', 5, 2)->default(0);
             $table->decimal('sugar', 5, 2)->default(0);
+            $table->decimal('sodium', 6, 2)->default(0);
+            $table->string('vitamins')->nullable();
+            $table->string('minerals')->nullable();
             $table->string('serving_size')->default('100g');
-            $table->boolean('is_admin_approved')->default(true);
             $table->timestamps();
         });
     }

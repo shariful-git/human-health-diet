@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\DailyLog;
-use App\Models\Food;
 use App\Models\MealLog;
+use App\Models\PlanDay;
+use App\Models\PlanDayFood;
+use App\Models\DailyLog;
 use Carbon\Carbon;
 
 class MealController extends Controller
@@ -14,52 +15,72 @@ class MealController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $profile = $user->profile;
-
-        if (!$profile) {
-            return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
-        }
-        
         $today = Carbon::today()->toDateString();
-        $dailyLog = DailyLog::firstOrCreate(['user_id' => Auth::id(), 'date' => $today]);
-        
-        $meals = $dailyLog->mealLogs()->with('food')->get()->groupBy('meal_type');
-        $allFoods = Food::all();
 
-        return view('meals.index', compact('meals', 'allFoods', 'dailyLog'));
+        $dailyLog = DailyLog::firstOrCreate(['user_id' => $user->id, 'date' => $today]);
+
+        $loggedMeals = MealLog::where('user_id', $user->id)
+            ->where('date', $today)
+            ->with('food')
+            ->get()
+            ->groupBy('meal_type');
+
+        $plannedMeals = collect();
+        if ($user->active_plan_id) {
+            $currentDay = PlanDay::where('plan_id', $user->active_plan_id)
+                ->where('day_number', $user->current_plan_day_number)
+                ->first();
+
+            if ($currentDay) {
+                $plannedMeals = PlanDayFood::where('plan_day_id', $currentDay->id)
+                    ->with('food')
+                    ->get()
+                    ->groupBy('meal_type');
+            }
+        }
+
+        $summary = ['calories' => 0, 'protein' => 0, 'carbs' => 0, 'fat' => 0];
+        $completedMeals = MealLog::where('user_id', $user->id)->where('date', $today)->with('food')->get();
+        foreach ($completedMeals as $log) {
+            $summary['calories'] += $log->calculated_calories;
+            $summary['protein']  += ($log->food->protein * $log->servings);
+            $summary['carbs']    += ($log->food->carbohydrate * $log->servings);
+            $summary['fat']      += ($log->food->fat * $log->servings);
+        }
+
+        return view('meals.index', compact('loggedMeals', 'plannedMeals', 'summary', 'user', 'dailyLog'));
     }
 
-    public function store(Request $request)
+    public function logFromPlan($planFoodId)
     {
-        $request->validate([
-            'food_id' => 'required|exists:foods,id',
-            'meal_type' => 'required|in:breakfast,lunch,dinner,snacks',
-            'servings' => 'required|numeric|min:0.1',
-        ]);
-
+        $planFood = PlanDayFood::with('food')->findOrFail($planFoodId);
+        $user = Auth::user();
         $today = Carbon::today()->toDateString();
-        $dailyLog = DailyLog::firstOrCreate(['user_id' => Auth::id(), 'date' => $today]);
-        
-        $food = Food::find($request->food_id);
-        $calculatedCalories = (int) ($food->calories * $request->servings);
+
+        $calculatedCalories = (int) ($planFood->food->calories * $planFood->servings);
 
         MealLog::create([
-            'daily_log_id' => $dailyLog->id,
-            'food_id' => $food->id,
-            'meal_type' => $request->meal_type,
-            'servings' => $request->servings,
+            'user_id' => $user->id,
+            'food_id' => $planFood->food_id,
+            'date' => $today,
+            'meal_type' => $planFood->meal_type,
+            'servings' => $planFood->servings,
             'calculated_calories' => $calculatedCalories,
-            'is_completed' => true
+            'status' => 'completed'
         ]);
 
-        return redirect()->route('meals.index')->with('success', 'Food added successfully!');
+        $totalCalories = MealLog::where('user_id', $user->id)->where('date', $today)->sum('calculated_calories');
+        DailyLog::where('user_id', $user->id)->where('date', $today)->update(['total_calories_intake' => $totalCalories]);
+
+        return redirect()->route('meals.index')->with('success', "🎉 Added {$planFood->food->name} to your daily intake!");
     }
 
     public function destroy($id)
     {
-        $mealLog = MealLog::findOrFail($id);
+        $mealLog = MealLog::where('user_id', Auth::id())->findOrFail($id);
+
         $mealLog->delete();
 
-        return redirect()->route('meals.index')->with('success', 'Food removed successfully!');
+        return redirect()->route('meals.index')->with('success', 'Food item removed from today\'s consumption journal.');
     }
 }

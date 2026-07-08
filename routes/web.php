@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/meals', [MealController::class, 'index'])->name('meals.index');
-    Route::post('/meals', [MealController::class, 'store'])->name('meals.store');
+    Route::get('/meals/log-plan/{planFoodId}', [MealController::class, 'logFromPlan'])->name('meals.log.plan');
     Route::delete('/meals/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
 
     Route::get('/fitness', [FitnessActivityController::class, 'index'])->name('fitness.index');
@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/plans/day/{dayId}/update', [PlanController::class, 'updateDayRow'])->name('plans.day.update');
     Route::post('/plans/{id}/enroll', [PlanController::class, 'enroll'])->name('plans.enroll');
     Route::delete('/plans/custom/{id}', [PlanController::class, 'destroy'])->name('plans.custom.destroy');
+    Route::post('/plans/day/{dayId}/add-food', [PlanController::class, 'addFoodToDay'])->name('plans.day.addFood');
+    Route::delete('/plans/day-food/{itemId}', [PlanController::class, 'removeFoodFromDay'])->name('plans.day.removeFood');
 });
 
 require __DIR__ . '/auth.php';

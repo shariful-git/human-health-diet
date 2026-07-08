@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MealLog extends Model
 {
-    protected $fillable = ['daily_log_id', 'food_id', 'meal_type', 'servings', 'calculated_calories', 'is_completed'];
+    protected $fillable = ['user_id', 'food_id', 'date', 'meal_type', 'servings', 'calculated_calories', 'status'];
 
     public function food()
     {
@@ -16,20 +16,5 @@ class MealLog extends Model
     public function dailyLog()
     {
         return $this->belongsTo(DailyLog::class);
-    }
-
-    protected static function booted()
-    {
-        static::saved(function ($mealLog) {
-            $mealLog->dailyLog->update([
-                'total_calories_intake' => $mealLog->dailyLog->mealLogs()->sum('calculated_calories')
-            ]);
-        });
-
-        static::deleted(function ($mealLog) {
-            $mealLog->dailyLog->update([
-                'total_calories_intake' => $mealLog->dailyLog->mealLogs()->sum('calculated_calories')
-            ]);
-        });
     }
 }

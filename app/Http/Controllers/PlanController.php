@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\PlanDay;
+use App\Models\PlanDayFood;
 use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
@@ -58,8 +60,32 @@ class PlanController extends Controller
 
     public function editDays($id)
     {
-        $plan = Plan::where('user_id', Auth::id())->with('days')->findOrFail($id);
-        return view('plans.edit-days', compact('plan'));
+        $plan = Plan::where('user_id', Auth::id())
+            ->where('plan_type', 'custom')
+            ->with('days.planFoods.food')
+            ->findOrFail($id);
+
+        $allFoods = Food::all();
+
+        return view('plans.edit-days', compact('plan', 'allFoods'));
+    }
+
+    public function addFoodToDay(Request $request, $dayId)
+    {
+        $request->validate([
+            'food_id' => 'required|exists:foods,id',
+            'meal_type' => 'required|in:breakfast,lunch,dinner,snacks',
+            'servings' => 'required|numeric|min:0.1',
+        ]);
+
+        PlanDayFood::create([
+            'plan_day_id' => $dayId,
+            'food_id' => $request->food_id,
+            'meal_type' => $request->meal_type,
+            'servings' => $request->servings,
+        ]);
+
+        return redirect()->back()->with('success', 'Food added to your custom plan schedule!');
     }
 
     public function updateDayRow(Request $request, $dayId)
@@ -99,5 +125,13 @@ class PlanController extends Controller
         $plan->delete();
 
         return redirect()->route('plans.index')->with('success', 'Custom plan and its daily schedules deleted successfully.');
+    }
+
+    public function removeFoodFromDay($itemId)
+    {
+        $planFood = PlanDayFood::findOrFail($itemId);
+        $planFood->delete();
+
+        return redirect()->back()->with('success', 'Food item removed from this plan day schedule.');
     }
 }
