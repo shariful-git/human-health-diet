@@ -1,40 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Human Health Diet Control System</title>
+    <title>NutraOS — Enterprise-Grade Metabolic & Dietary Intelligence Architecture</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
 </head>
-<body class="antialiased bg-slate-50 text-slate-900 selection:bg-indigo-500 selection:text-white">
 
-    <nav class="w-full bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md shadow-indigo-200">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                </div>
-                <span class="font-extrabold text-xl tracking-tight text-slate-900">AuraPulse</span>
-            </div>
+<body class="antialiased bg-slate-50 text-slate-900 selection:bg-emerald-600 selection:text-white overflow-x-hidden">
+
+    <!-- Premium Enterprise Header Navigation -->
+    <nav class="w-full bg-white/80 backdrop-blur-xl border-b border-slate-200/50 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 h-20 flex justify-between items-center">
             
-            <div class="flex items-center gap-5">
+            <!-- Corporate Identity -->
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center shadow-md shadow-emerald-700/20">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                    </svg>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-slate-900">
+                    Nutra<span class="text-emerald-600 font-extrabold">OS</span>
+                </span>
+            </a>
+
+            <!-- Navigation Controls -->
+            <div class="flex items-center gap-6">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm font-bold bg-slate-900 text-white px-6 h-11 flex items-center rounded-xl hover:bg-slate-800 transition-all duration-200 shadow-sm">Dashboard</a>
+                        <a href="{{ url('/dashboard') }}"
+                            class="text-xs font-bold uppercase tracking-wider bg-slate-900 text-white px-5 h-10 inline-flex items-center rounded-lg hover:bg-slate-800 transition-all shadow-sm">
+                            Access Console
+                        </a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Sign In</a>
+                        <a href="{{ route('login') }}"
+                            class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors py-2">
+                            Client Sign In
+                        </a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="text-sm font-bold bg-indigo-600 text-white px-6 h-11 flex items-center rounded-xl hover:bg-indigo-700 transition-all duration-200 shadow-lg shadow-indigo-100">Join Free</a>
+                            <a href="{{ route('register') }}"
+                                class="text-xs font-bold uppercase tracking-wider bg-emerald-600 text-white px-5 h-10 inline-flex items-center rounded-lg hover:bg-emerald-700 transition-all shadow-sm shadow-emerald-600/10">
+                                Deploy Account
+                            </a>
                         @endif
                     @endauth
                 @endif
@@ -42,110 +63,167 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 pt-16 pb-24 lg:pt-28 lg:pb-36 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-        <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-            <div class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-xs font-bold tracking-wide uppercase">
-                <span class="w-2 h-2 rounded-full bg-indigo-600 animate-ping"></span>
-                The Intelligent Diet Optimizer
+    <!-- Main Hero Architectural Section -->
+    <main class="max-w-7xl mx-auto px-6 sm:px-8 pt-16 pb-24 lg:pt-28 lg:pb-36 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative">
+        
+        <!-- Scientific Data Columns Map Content -->
+        <div class="lg:col-span-6 space-y-8 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 bg-slate-900 text-slate-200 px-3.5 py-1.5 rounded-md text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Engine Engine v4.2 Stable
             </div>
-            
-            <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-                Precision tracking for a <span class="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">healthier you.</span>
+
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+                The analytical platform for 
+                <span class="bg-gradient-to-r from-emerald-600 to-teal-700 bg-clip-text text-transparent block">
+                    metabolic control.
+                </span>
             </h1>
-            
-            <p class="text-lg text-slate-500 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                Log meals, track active calorie expenditure, monitor hydration, and unlock streak-based rewards inside a unified dashboard engineered for lifestyle transformation.
+
+            <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-xl mx-auto lg:mx-0">
+                NutraOS abstracts the complexity of human nutrition. Synthesize real-time biometric inputs, execute automated dynamic energy expenditure projections, and audit systemic cellular hydration thresholds.
             </p>
-            
+
             <div class="flex flex-wrap justify-center lg:justify-start gap-4">
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="bg-slate-900 text-white font-bold px-8 h-14 flex items-center rounded-xl shadow-xl shadow-slate-200 hover:bg-slate-800 transition-all">Go to App Dashboard</a>
+                    <a href="{{ url('/dashboard') }}"
+                        class="bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-7 h-12 inline-flex items-center rounded-lg shadow-md hover:bg-slate-800 transition-all">
+                        Launch Systems Dashboard
+                    </a>
                 @else
-                    <a href="{{ route('register') }}" class="bg-indigo-600 text-white font-bold px-8 h-14 flex items-center rounded-xl shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all">Start Your Journey</a>
-                    <a href="{{ route('login') }}" class="bg-white border border-slate-200 text-slate-700 font-bold px-8 h-14 flex items-center rounded-xl hover:bg-slate-50 transition-all">Sign In</a>
+                    <a href="{{ route('register') }}"
+                        class="bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider px-7 h-12 inline-flex items-center rounded-lg shadow-md shadow-emerald-600/10 hover:bg-emerald-700 transition-all">
+                        Initialize Deployment
+                    </a>
+                    <a href="{{ route('login') }}"
+                        class="bg-white border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider px-7 h-12 inline-flex items-center rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all">
+                        Request Access
+                    </a>
                 @endauth
             </div>
         </div>
 
-        <div class="lg:col-span-5 relative">
-            <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-3xl opacity-10 filter blur-3xl -z-10"></div>
-            
-            <div class="bg-slate-900 rounded-3xl shadow-2xl p-8 text-white space-y-6 border border-slate-800">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
-                    <div>
-                        <p class="text-xs font-bold tracking-wider uppercase text-slate-400">Daily Balance</p>
-                        <h4 class="text-3xl font-black mt-1">1,940 <span class="text-sm font-normal text-slate-500">kcal</span></h4>
-                    </div>
-                    <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs px-3 py-1.5 rounded-xl font-bold">Deficit Active</span>
-                </div>
+        <!-- Analytical Data Diagnostic Interface (Right Column View) -->
+        <div class="lg:col-span-6 relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl opacity-5 filter blur-3xl -z-10"></div>
+
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200/60 p-6 sm:p-8 space-y-6">
                 
-                <div class="space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-xs font-bold text-slate-300">
-                            <span>🍳 Micronutrients</span>
-                            <span>72%</span>
-                        </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="bg-indigo-500 h-full rounded-full" style="width: 72%"></div>
-                        </div>
+                <!-- Clinical Header View -->
+                <div class="flex justify-between items-start border-b border-slate-100 pb-5">
+                    <div>
+                        <p class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Total System Energy Matrix</p>
+                        <h4 class="text-4xl font-extrabold mt-1 text-slate-900 tracking-tight">1,940 <span class="text-xs font-medium text-slate-400 tracking-normal ml-1">KCAL / TOTAL EXP</span></h4>
                     </div>
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-xs font-bold text-slate-300">
-                            <span>💧 Water Hydration</span>
-                            <span>2,250 / 3000 ml</span>
+                    <span class="bg-emerald-50 text-emerald-700 border border-emerald-100 text-[10px] font-bold tracking-wide uppercase px-2.5 py-1 rounded">
+                        Optimal Curve
+                    </span>
+                </div>
+
+                <!-- Live Dynamic Realtime Metrics Array -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Data Block 1 -->
+                    <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/60 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold tracking-wider text-slate-400 uppercase">Micronutrient Audit</span>
+                            <span class="text-xs font-bold text-emerald-600 font-mono">72.4%</span>
                         </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="bg-sky-400 h-full rounded-full" style="width: 75%"></div>
+                        <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-emerald-600 h-full rounded-full" style="width: 72.4%"></div>
                         </div>
+                        <p class="text-[10px] text-slate-500 font-medium">Trace values match optimized macro profiles.</p>
+                    </div>
+
+                    <!-- Data Block 2 -->
+                    <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/60 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold tracking-wider text-slate-400 uppercase">Volumetric Hydration</span>
+                            <span class="text-xs font-bold text-teal-600 font-mono">75.0%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-teal-600 h-full rounded-full" style="width: 75%"></div>
+                        </div>
+                        <p class="text-[10px] text-slate-500 font-medium">2,250ml verified / 3,000ml baseline target.</p>
                     </div>
                 </div>
 
-                <div class="pt-2 flex justify-between items-center text-xs text-slate-400 font-semibold bg-slate-800/40 p-3.5 rounded-2xl border border-slate-800">
-                    <span class="flex items-center gap-2"><span class="text-amber-500">🔥</span> 5 Days Streak Active</span>
-                    <span class="text-indigo-400">+120 pts</span>
+                <!-- Systems Architecture Analytics Logging Status Footer -->
+                <div class="flex items-center justify-between text-[11px] text-slate-500 bg-slate-900 text-slate-300 p-4 rounded-xl shadow-inner font-mono">
+                    <span class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping"></span>
+                        METABOLIC STREAK: 05 CYCLES SECURED
+                    </span>
+                    <span class="text-emerald-400 font-bold">+120 INDEX PTS</span>
                 </div>
+
             </div>
         </div>
     </main>
 
-    <section class="bg-white border-t border-slate-100 py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-2xl mx-auto text-center mb-16 space-y-3">
-                <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Engineered for real results.</h2>
-                <p class="text-slate-500 font-medium">A scientific approach to fitness and clean eating architecture.</p>
+    <!-- Operational Platform Core Architecture Details -->
+    <section class="bg-white border-t border-slate-200/60 py-24 sm:py-32">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            
+            <div class="max-w-3xl mx-auto text-center mb-20 space-y-3">
+                <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                    Engineered for computational metabolic accuracy.
+                </h2>
+                <p class="text-slate-500 font-medium max-w-xl mx-auto text-sm sm:text-base">
+                    Eliminate human error with decentralized journal structures and biometric standard modeling.
+                </p>
             </div>
 
+            <!-- Features Systems Array Grid Grid Layout -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 rounded-2xl border border-slate-100 hover:border-indigo-100 transition-all duration-300 bg-slate-50/50 space-y-4 group">
-                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center border border-slate-200/60 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-5 h-5 text-indigo-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                
+                <!-- Corporate Pillar Feature Component 1 -->
+                <div class="p-8 rounded-xl border border-slate-200/60 hover:border-emerald-500/30 hover:shadow-lg transition-all duration-300 space-y-4 bg-slate-50/30">
+                    <div class="w-10 h-10 bg-slate-900 text-emerald-400 rounded-lg flex items-center justify-center shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
+                        </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900">Automated BMR & TDEE</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed font-medium">Instantly calculate dynamic metabolic variables using standardized biometric models mapped directly to your final profile goals.</p>
+                    <h3 class="text-base font-bold text-slate-900 tracking-tight">Predictive BMR & TDEE Calculations</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                        Automate baseline metabolic variables utilizing standardized Harris-Benedict formulas mapping dynamic adjustments directly against systemic weight fluctuations.
+                    </p>
                 </div>
 
-                <div class="p-8 rounded-2xl border border-slate-100 hover:border-indigo-100 transition-all duration-300 bg-slate-50/50 space-y-4 group">
-                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center border border-slate-200/60 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-5 h-5 text-indigo-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <!-- Corporate Pillar Feature Component 2 -->
+                <div class="p-8 rounded-xl border border-slate-200/60 hover:border-emerald-500/30 hover:shadow-lg transition-all duration-300 space-y-4 bg-slate-50/30">
+                    <div class="w-10 h-10 bg-slate-900 text-emerald-400 rounded-lg flex items-center justify-center shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900">Granular Macro Logging</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed font-medium">Breakdown nutritional journals across key metrics including protein, carbohydrate structures, dietary fibers, and systemic fat limits.</p>
+                    <h3 class="text-base font-bold text-slate-900 tracking-tight">Granular Macronutrient Auditing</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                        Log accurate molecular profile distributions. Isolate structural proteins, clean complex carbohydrate bonds, saturated limits, and total dietary asset fibers.
+                    </p>
                 </div>
 
-                <div class="p-8 rounded-2xl border border-slate-100 hover:border-indigo-100 transition-all duration-300 bg-slate-50/50 space-y-4 group">
-                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center border border-slate-200/60 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                        <svg class="w-5 h-5 text-indigo-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                <!-- Corporate Pillar Feature Component 3 -->
+                <div class="p-8 rounded-xl border border-slate-200/60 hover:border-emerald-500/30 hover:shadow-lg transition-all duration-300 space-y-4 bg-slate-50/30">
+                    <div class="w-10 h-10 bg-slate-900 text-emerald-400 rounded-lg flex items-center justify-center shadow-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900">Gamified Reward Engine</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed font-medium">Consistently close out your daily lifestyle metrics checkpoint to retain streaks, level up logs, and secure future premium benefits.</p>
+                    <h3 class="text-base font-bold text-slate-900 tracking-tight">Automated Verification Engines</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                        Lock in biological parameters checkpoints daily to track operational health integrity markers, secure system levels, and clear modern premium platform pathways.
+                    </p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <footer class="text-center py-12 text-xs font-semibold text-slate-400 bg-slate-50 border-t border-slate-100/60">
-        &copy; {{ date('Y') }} AuraPulse Architecture. Powered by Laravel 12. All rights reserved.
+    <!-- Structural Minimal Clean Corporate Footer Layout -->
+    <footer class="text-center py-12 text-[10px] tracking-widest font-bold uppercase text-slate-400 bg-slate-50 border-t border-slate-200/50">
+        &copy; {{ date('Y') }} NutraOS Core Global Architecture. All intellectual data properties registered.
     </footer>
 
 </body>
+
 </html>

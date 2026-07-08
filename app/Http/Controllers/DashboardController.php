@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $profile = $user->profile;
 
         if (!$profile) {
-            return redirect()->route('profile.health.edit')->with('info', 'Please complete your health profile first!');
+            return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
         }
 
         $todayLog = DailyLog::firstOrCreate([
