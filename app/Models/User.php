@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'active_plan_id', 'is_admin'])]
+#[Fillable(['name', 'email', 'password', 'active_plan_id', 'current_plan_day_number', 'is_admin'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser
 {
@@ -59,7 +59,11 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        // শুধুমাত্র যাদের is_admin কলামের মান true (১), তারা এডমিন প্যানেলে ঢুকতে পারবে
         return $this->is_admin === true || $this->is_admin === 1;
+    }
+
+    public function activePlan()
+    {
+        return $this->belongsTo(Plan::class, 'active_plan_id');
     }
 }

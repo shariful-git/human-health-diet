@@ -74,6 +74,47 @@
                 </div>
             </div>
 
+            @if ($currentDayPlan)
+                <div
+                    class="bg-gradient-to-r from-slate-900 to-indigo-950 p-6 rounded-2xl shadow-lg text-white mb-6 border border-indigo-500/20">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Currently
+                                Following</span>
+                            <h3 class="text-xl font-black">{{ $user->activePlan->name }}</h3>
+                        </div>
+                        <span class="bg-indigo-600 text-xs font-black px-4 py-2 rounded-xl">
+                            DAY {{ $user->current_plan_day_number }} OF {{ $user->activePlan->duration_days }}
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-xs font-bold text-slate-400 uppercase">🍳 Breakfast</p>
+                            <p class="mt-1 font-medium text-slate-200">{{ $currentDayPlan->breakfast_suggestion }}</p>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-xs font-bold text-slate-400 uppercase">🍱 Lunch</p>
+                            <p class="mt-1 font-medium text-slate-200">{{ $currentDayPlan->lunch_suggestion }}</p>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-xs font-bold text-slate-400 uppercase">🌆 Dinner</p>
+                            <p class="mt-1 font-medium text-slate-200">{{ $currentDayPlan->dinner_suggestion }}</p>
+                        </div>
+                        <div class="bg-indigo-500/10 p-3 rounded-xl border border-indigo-500/20">
+                            <p class="text-xs font-bold text-indigo-400 uppercase">🏃‍♂️ Today's Workout</p>
+                            <p class="mt-1 font-bold text-white">{{ $currentDayPlan->exercise_suggestion }}</p>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="bg-white p-6 rounded-2xl border border-dashed border-slate-200 text-center mb-6">
+                    <p class="text-sm text-slate-500 italic">You don't have any active plan. <a
+                            href="{{ route('plans.index') }}" class="text-indigo-600 font-bold underline">Choose a
+                            Plan</a> to start your structured diet journey!</p>
+                </div>
+            @endif
+
         </div>
     </div>
 </x-app-layout>

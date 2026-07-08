@@ -79,10 +79,23 @@ class PlanController extends Controller
         return redirect()->back()->with('success', "Day {$day->day_number} settings updated successfully!");
     }
 
+    public function enroll($id)
+    {
+        $plan = Plan::findOrFail($id);
+        $user = Auth::user();
+
+        $user->update([
+            'active_plan_id' => $plan->id,
+            'current_plan_day_number' => 1
+        ]);
+
+        return redirect()->route('dashboard')->with('success', "🎯 Successfully enrolled in: {$plan->name}. Welcome to Day 1!");
+    }
+
     public function destroy($id)
     {
         $plan = Plan::where('user_id', Auth::id())->where('plan_type', 'custom')->findOrFail($id);
-        
+
         $plan->delete();
 
         return redirect()->route('plans.index')->with('success', 'Custom plan and its daily schedules deleted successfully.');

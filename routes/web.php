@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/plans/custom/store', [PlanController::class, 'storeCustom'])->name('plans.custom.store');
     Route::get('/plans/{id}/edit-days', [PlanController::class, 'editDays'])->name('plans.edit.days');
     Route::put('/plans/day/{dayId}/update', [PlanController::class, 'updateDayRow'])->name('plans.day.update');
+    Route::post('/plans/{id}/enroll', [PlanController::class, 'enroll'])->name('plans.enroll');
     Route::delete('/plans/custom/{id}', [PlanController::class, 'destroy'])->name('plans.custom.destroy');
 });
 

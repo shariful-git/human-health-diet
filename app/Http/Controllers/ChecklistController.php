@@ -44,9 +44,24 @@ class ChecklistController extends Controller
 
         $dailyLog->update(['is_completed' => true]);
 
-        RewardStreakService::awardPoints($user, 20, 'Completed Day Checklist');
-        RewardStreakService::updateStreak($user);
+        \App\Services\RewardStreakService::awardPoints($user, 20, 'Completed Day Checklist');
+        \App\Services\RewardStreakService::updateStreak($user);
 
-        return redirect()->route('checklist.index')->with('success', '🎉 Awesome! Day Completed. +20 Points Awarded and Streak Updated!');
+        if ($user->active_plan_id) {
+            $activePlan = $user->activePlan;
+
+            if ($user->current_plan_day_number < $activePlan->duration_days) {
+                $user->increment('current_plan_day_number');
+            } else {
+                \App\Services\RewardStreakService::awardPoints($user, 500, 'Completed Full Plan Challenge');
+                $user->update([
+                    'active_plan_id' => null,
+                    'current_plan_day_number' => 1
+                ]);
+                return redirect()->route('plans.index')->with('success', '🎉 CONGRATULATIONS! You completed the entire plan! +500 Bonus Points Awarded!');
+            }
+        }
+
+        return redirect()->back()->with('success', '🎉 Day Completed! +20 Points. Your plan has advanced to the next day!');
     }
 }
