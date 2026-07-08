@@ -37,7 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports/export-pdf', [ReportController::class, 'exportPdf'])->name('reports.pdf');
 
     Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
-    Route::post('/plans/{id}/enroll', [PlanController::class, 'enroll'])->name('plans.enroll');
+    Route::get('/plans/custom/create', [PlanController::class, 'createCustom'])->name('plans.custom.create');
+    Route::post('/plans/custom/store', [PlanController::class, 'storeCustom'])->name('plans.custom.store');
+    Route::get('/plans/{id}/edit-days', [PlanController::class, 'editDays'])->name('plans.edit.days');
+    Route::put('/plans/day/{dayId}/update', [PlanController::class, 'updateDayRow'])->name('plans.day.update');
+    Route::delete('/plans/custom/{id}', [PlanController::class, 'destroy'])->name('plans.custom.destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -1,43 +1,60 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('📋 Choose Your Diet & Fitness Plan') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('📋 Diet & Fitness Plans Engine') }}</h2>
+            <a href="{{ route('plans.custom.create') }}"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow">+
+                Create Custom Plan</a>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
+    <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-12">
+        <div>
+            <h3 class="text-lg font-bold text-gray-700 mb-4">Official Expert Plans</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @forelse($plans as $plan)
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between">
+                @foreach ($defaultPlans as $plan)
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                        <span
+                            class="text-xs font-bold bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">{{ $plan->duration_days }}
+                            Days Challenge</span>
+                        <h4 class="text-lg font-bold text-slate-900">{{ $plan->name }}</h4>
+                        <p class="text-xs text-slate-500">{{ $plan->description }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-lg font-bold text-gray-700 mb-4">My Custom Tailored Plans</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach ($myCustomPlans as $cPlan)
+                    <div
+                        class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex justify-between items-center">
                         <div>
-                            <span
-                                class="text-xs font-bold uppercase tracking-widest bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">
-                                {{ $plan->duration_days }} Days Challenge
-                            </span>
-                            <h3 class="text-xl font-black text-gray-800 mt-3">{{ $plan->name }}</h3>
-                            <p class="text-sm text-gray-500 mt-2">
-                                {{ $plan->description ?? 'No description provided for this plan.' }}</p>
+                            <h4 class="text-lg font-bold text-slate-900">{{ $cPlan->name }}</h4>
+                            <p class="text-xs text-slate-400 mt-1">Duration: {{ $cPlan->duration_days }} Days Blueprint
+                            </p>
                         </div>
 
-                        <div class="mt-6">
-                            <form action="{{ route('plans.enroll', $plan->id) }}" method="POST">
+                        <div class="flex items-center gap-2">
+                            <a href="{{ route('plans.edit.days', $cPlan->id) }}"
+                                class="border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold px-4 py-2 rounded-xl transition">
+                                ⚙️ Setup
+                            </a>
+
+                            <form action="{{ route('plans.custom.destroy', $cPlan->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this custom plan? All daily configurations will be permanently lost.');">
                                 @csrf
+                                @method('DELETE')
                                 <button type="submit"
-                                    class="w-full bg-gray-900 hover:bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-xl transition text-center text-sm shadow">
-                                    Activate This Plan 🚀
+                                    class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-4 py-2 rounded-xl transition">
+                                    🗑️ Delete
                                 </button>
                             </form>
                         </div>
                     </div>
-                @empty
-                    <div class="col-span-3 text-center py-12 bg-white rounded-2xl border border-dashed">
-                        <p class="text-gray-400 italic">No official plans available from Admin yet.</p>
-                    </div>
-                @endforelse
+                @endforeach
             </div>
-
         </div>
     </div>
 </x-app-layout>
