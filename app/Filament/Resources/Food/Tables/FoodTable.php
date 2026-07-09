@@ -71,19 +71,11 @@ class FoodTable
             ->filters([
                 SelectFilter::make('category')
                     ->options([
-                        'grain' => 'Grain',
-                        'vegetable' => 'Vegetable',
-                        'fruit' => 'Fruit',
-                        'meat' => 'Meat',
-                        'fish' => 'Fish',
-                        'egg' => 'Egg',
-                        'dairy' => 'Dairy',
-                        'legume' => 'Legume',
-                        'nut' => 'Nut',
-                        'oil' => 'Oil',
-                        'beverage' => 'Beverage',
-                        'snack' => 'Snack',
-                        'other' => 'Other',
+                        'Breakfast' => 'Breakfast',
+                        'Lunch' => 'Lunch',
+                        'Dinner' => 'Dinner',
+                        'Snacks' => 'Snacks',
+                        'Other' => 'Other',
                     ]),
 
                 TernaryFilter::make('is_admin_approved')

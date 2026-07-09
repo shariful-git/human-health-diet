@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('vitamins')->nullable();
             $table->string('minerals')->nullable();
             $table->string('serving_size')->default('100g');
+            $table->boolean('is_admin_approved')->default(false);
             $table->timestamps();
         });
     }
