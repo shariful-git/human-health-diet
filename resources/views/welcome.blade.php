@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NutraOS — Enterprise-Grade Metabolic & Dietary Intelligence Architecture</title>
+    <title>{{ config('app.name') }} — Enterprise-Grade Metabolic & Dietary Intelligence Architecture</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
                     </svg>
                 </div>
                 <span class="font-bold text-lg tracking-tight text-slate-900">
-                    Nutra<span class="text-emerald-600 font-extrabold">OS</span>
+                    HUMAN HEALTH <span class="text-emerald-600 font-extrabold">DIET</span>
                 </span>
             </a>
 
@@ -81,7 +81,7 @@
             </h1>
 
             <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-xl mx-auto lg:mx-0">
-                NutraOS abstracts the complexity of human nutrition. Synthesize real-time biometric inputs, execute automated dynamic energy expenditure projections, and audit systemic cellular hydration thresholds.
+                {{ config('app.name') }} abstracts the complexity of human nutrition. Synthesize real-time biometric inputs, execute automated dynamic energy expenditure projections, and audit systemic cellular hydration thresholds.
             </p>
 
             <div class="flex flex-wrap justify-center lg:justify-start gap-4">
@@ -221,7 +221,7 @@
 
     <!-- Structural Minimal Clean Corporate Footer Layout -->
     <footer class="text-center py-12 text-[10px] tracking-widest font-bold uppercase text-slate-400 bg-slate-50 border-t border-slate-200/50">
-        &copy; {{ date('Y') }} NutraOS Core Global Architecture. All intellectual data properties registered.
+        &copy; {{ date('Y') }} {{ config('app.name') }} Core Global Architecture. All intellectual data properties registered.
     </footer>
 
 </body>

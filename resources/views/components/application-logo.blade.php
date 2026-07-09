@@ -1,1 +1,1 @@
-<img src="{{ asset('app-logo.png') }}" height="40px" width="40px" alt="{{ config('app.name') }}">
+<b>{{ config('app.name') }}</b>
