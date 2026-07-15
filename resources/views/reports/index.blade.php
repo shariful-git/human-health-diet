@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('📊 Weekly Analytics & Reports') }}
+                {{ __('📊 WEEKLY ANALYTICS & REPORTS') }}
             </h2>
             <div class="flex gap-2">
                 <a href="{{ route('reports.csv') }}"

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('📋 Diet & Fitness Plans Engine') }}</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('📋 DIET & FITNESS PLANS ENGINE') }}</h2>
             <a href="{{ route('plans.custom.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow">+ Create Custom Plan</a>
         </div>
     </x-slot>

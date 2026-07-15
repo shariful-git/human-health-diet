@@ -1,4 +1,9 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('🍳 MEALS') }}
+        </h2>
+    </x-slot>
     <div class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
 
         <div class="space-y-6">
@@ -20,7 +25,8 @@
                                     <p class="font-bold text-slate-800">{{ $pFood->food->name }}</p>
                                     <p class="text-[11px] text-slate-400">Specs: {{ $pFood->servings }} Servings
                                         ({{ $pFood->food->calories * $pFood->servings }} kcal | P:
-                                        {{ $pFood->food->protein * $pFood->servings }}g)</p>
+                                        {{ $pFood->food->protein * $pFood->servings }}g)
+                                    </p>
                                 </div>
                                 <a href="{{ route('meals.log.plan', $pFood->id) }}"
                                     class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition">
