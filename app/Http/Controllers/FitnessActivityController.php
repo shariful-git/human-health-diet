@@ -71,7 +71,10 @@ class FitnessActivityController extends Controller
 
     public function destroyExercise($id)
     {
-        $log = ExerciseLog::findOrFail($id);
+        $log = ExerciseLog::whereHas('dailyLog', function ($q) {
+            $q->where('user_id', Auth::id());
+        })->findOrFail($id);
+
         $log->delete();
 
         return redirect()->route('fitness.index')->with('success', 'Exercise log removed!');

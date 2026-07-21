@@ -26,7 +26,25 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        Auth::user()->profile()->updateOrCreate(['user_id' => Auth::id()], $request->validated());
+        $user = $request->user();
+        $user->fill($request->safe()->only(['name', 'email']));
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
+
+        $profileData = array_filter(
+            $request->safe()->only([
+                'gender', 'age', 'height', 'weight', 'activity_level', 'goal', 'medical_conditions'
+            ]),
+            fn($val) => !is_null($val)
+        );
+
+        if (!empty($profileData)) {
+            $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
+        }
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

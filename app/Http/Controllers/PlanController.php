@@ -72,6 +72,10 @@ class PlanController extends Controller
 
     public function addFoodToDay(Request $request, $dayId)
     {
+        $day = PlanDay::whereHas('plan', function ($q) {
+            $q->where('user_id', Auth::id());
+        })->findOrFail($dayId);
+
         $request->validate([
             'food_id' => 'required|exists:foods,id',
             'meal_type' => 'required|in:breakfast,lunch,dinner,snacks',
@@ -79,7 +83,7 @@ class PlanController extends Controller
         ]);
 
         PlanDayFood::create([
-            'plan_day_id' => $dayId,
+            'plan_day_id' => $day->id,
             'food_id' => $request->food_id,
             'meal_type' => $request->meal_type,
             'servings' => $request->servings,
@@ -90,7 +94,19 @@ class PlanController extends Controller
 
     public function updateDayRow(Request $request, $dayId)
     {
-        $day = PlanDay::findOrFail($dayId);
+        $day = PlanDay::whereHas('plan', function ($q) {
+            $q->where('user_id', Auth::id());
+        })->findOrFail($dayId);
+
+        $request->validate([
+            'breakfast_suggestion' => 'nullable|string',
+            'lunch_suggestion' => 'nullable|string',
+            'dinner_suggestion' => 'nullable|string',
+            'snacks_suggestion' => 'nullable|string',
+            'exercise_suggestion' => 'nullable|string',
+            'water_goal_ml' => 'nullable|integer|min:0',
+            'sleep_goal_hours' => 'nullable|numeric|min:0|max:24',
+        ]);
 
         $day->update($request->only([
             'breakfast_suggestion',
@@ -107,7 +123,11 @@ class PlanController extends Controller
 
     public function enroll($id)
     {
-        $plan = Plan::findOrFail($id);
+        $plan = Plan::where(function ($q) {
+            $q->where('plan_type', 'default')
+              ->orWhere('user_id', Auth::id());
+        })->where('is_active', true)->findOrFail($id);
+
         $user = Auth::user();
 
         $user->update([
@@ -129,7 +149,10 @@ class PlanController extends Controller
 
     public function removeFoodFromDay($itemId)
     {
-        $planFood = PlanDayFood::findOrFail($itemId);
+        $planFood = PlanDayFood::whereHas('planDay.plan', function ($q) {
+            $q->where('user_id', Auth::id());
+        })->findOrFail($itemId);
+
         $planFood->delete();
 
         return redirect()->back()->with('success', 'Food item removed from this plan day schedule.');

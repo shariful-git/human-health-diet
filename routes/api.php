@@ -5,5 +5,5 @@ use App\Http\Controllers\API\ProfileController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show']);
-    Route::post('/profile', [ProfileController::class, 'storeOrUpdate']); // Create or Update
+    Route::match(['post', 'put', 'patch'], '/profile', [ProfileController::class, 'storeOrUpdate']);
 });

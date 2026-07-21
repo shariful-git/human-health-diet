@@ -22,10 +22,12 @@ class Profile extends Model
     protected static function booted()
     {
         static::saving(function ($profile) {
-            $profile->bmi = HealthCalculator::calculateBmi($profile->weight, $profile->height);
-            $profile->bmr = HealthCalculator::calculateBmr($profile->gender, $profile->weight, $profile->height, $profile->age);
-            $profile->tdee = HealthCalculator::calculateTdee($profile->bmr, $profile->activity_level);
-            $profile->daily_calorie_target = HealthCalculator::determineCalorieTarget($profile->tdee, $profile->goal);
+            if (!empty($profile->weight) && !empty($profile->height) && !empty($profile->gender) && !empty($profile->age) && !empty($profile->activity_level) && !empty($profile->goal)) {
+                $profile->bmi = HealthCalculator::calculateBmi($profile->weight, $profile->height);
+                $profile->bmr = HealthCalculator::calculateBmr($profile->gender, $profile->weight, $profile->height, $profile->age);
+                $profile->tdee = HealthCalculator::calculateTdee($profile->bmr, $profile->activity_level);
+                $profile->daily_calorie_target = HealthCalculator::determineCalorieTarget($profile->tdee, $profile->goal);
+            }
         });
     }
 }

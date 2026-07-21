@@ -78,8 +78,12 @@ class MealController extends Controller
     public function destroy($id)
     {
         $mealLog = MealLog::where('user_id', Auth::id())->findOrFail($id);
+        $date = $mealLog->date;
 
         $mealLog->delete();
+
+        $totalCalories = MealLog::where('user_id', Auth::id())->where('date', $date)->sum('calculated_calories');
+        DailyLog::where('user_id', Auth::id())->where('date', $date)->update(['total_calories_intake' => $totalCalories]);
 
         return redirect()->route('meals.index')->with('success', 'Food item removed from today\'s consumption journal.');
     }

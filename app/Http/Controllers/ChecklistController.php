@@ -70,6 +70,25 @@ class ChecklistController extends Controller
             return redirect()->back()->with('info', 'You have already finalized and completed this day!');
         }
 
+        $waterGoal = 3000;
+        if ($user->active_plan_id) {
+            $currentDayPlan = PlanDay::where('plan_id', $user->active_plan_id)
+                ->where('day_number', $user->current_plan_day_number)
+                ->first();
+            if ($currentDayPlan) {
+                $waterGoal = $currentDayPlan->water_goal_ml;
+            }
+        }
+
+        $breakfastDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'breakfast')->where('status', 'completed')->exists();
+        $lunchDone     = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'lunch')->where('status', 'completed')->exists();
+        $dinnerDone    = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'dinner')->where('status', 'completed')->exists();
+        $waterDone     = $dailyLog->water_intake_ml >= $waterGoal;
+
+        if (!$breakfastDone || !$lunchDone || !$dinnerDone || !$waterDone) {
+            return redirect()->back()->with('error', 'You must complete your main daily meals and reach your water goal before finalizing the day.');
+        }
+
         $dailyLog->update(['is_completed' => true]);
 
         RewardStreakService::awardPoints($user, 'complete_day');
