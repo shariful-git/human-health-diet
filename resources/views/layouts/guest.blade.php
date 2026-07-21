@@ -1,30 +1,65 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <title>{{ config('app.name', 'Human Health & Diet') }} — Client Portal</title>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased bg-slate-900 text-slate-100 selection:bg-emerald-500 selection:text-white min-h-screen flex flex-col justify-center items-center relative overflow-hidden py-12 px-4">
+    
+    <!-- Background Ambient Gradients -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-emerald-600/20 rounded-none blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-600/20 rounded-none blur-3xl pointer-events-none"></div>
+
+    <div class="w-full sm:max-w-md relative z-10 space-y-6">
+        <!-- Brand Header -->
+        <div class="text-center space-y-2">
+            <a href="/" class="inline-flex items-center justify-center transition-transform hover:scale-105">
+                <div class="flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-none border border-white/15 shadow-xl">
+                    <div class="w-8 h-8 rounded-none bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-black">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                        </svg>
+                    </div>
+                    <span class="font-black text-lg tracking-tight text-white">
+                        HUMAN HEALTH <span class="text-emerald-400">DIET</span>
+                    </span>
+                </div>
+            </a>
         </div>
-    </body>
+
+        <!-- Auth Card -->
+        <div class="w-full bg-slate-800/80 backdrop-blur-xl border border-slate-700/80 p-8 rounded-none shadow-2xl space-y-4">
+            {{ $slot }}
+        </div>
+
+        <!-- Return Home Link -->
+        <div class="text-center">
+            <a href="/" class="text-xs font-semibold text-slate-400 hover:text-emerald-400 transition-colors">
+                ← Return to Public Portal Overview
+            </a>
+        </div>
+    </div>
+
+</body>
+
 </html>

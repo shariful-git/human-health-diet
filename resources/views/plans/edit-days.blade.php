@@ -1,59 +1,70 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                🛠️ Customizing Blueprint: {{ $plan->name }}
-            </h2>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+                <h2 class="font-extrabold text-xl text-slate-900 tracking-tight flex items-center gap-2">
+                    🛠️ Customizing Blueprint: {{ $plan->name }}
+                </h2>
+                <p class="text-xs font-semibold text-slate-500 mt-0.5">Assign target meal menus to each day of the challenge.</p>
+            </div>
             <a href="{{ route('plans.index') }}"
-                class="bg-gray-800 text-white text-xs font-bold px-4 py-2 rounded-xl">Back to Plans</a>
+                class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold px-3.5 py-2 rounded-none transition-all inline-flex items-center gap-1">
+                ← Back to Plans
+            </a>
         </div>
     </x-slot>
 
-    <div class="py-12 max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-8">
+    <div class="py-8 max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-8">
 
         @foreach ($plan->days as $day)
-            <!-- প্রতিটি দিনের জন্য একটি ডেডিকেটেড কন্টেইনার বক্স -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-6">
-                <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <h4 class="text-md font-black text-indigo-600">📅 Day Plan: Number {{ $day->day_number }}</h4>
-                    <span class="text-xs font-bold text-slate-400">Target: 3000ml Water</span>
+            <div class="bg-white p-7 rounded-none shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-6">
+                <!-- Day Header -->
+                <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-none bg-indigo-50 text-indigo-700 flex items-center justify-center font-black text-xs font-mono border border-indigo-100">
+                            {{ $day->day_number }}
+                        </span>
+                        <h4 class="text-base font-extrabold text-slate-900">Day {{ $day->day_number }} Schedule</h4>
+                    </div>
+                    <span class="text-xs font-extrabold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">Target: 3,000ml Water</span>
                 </div>
 
-                <!-- ১. কারেন্টলি এই দিনে যে যে খাবারগুলো ইউজার অ্যাসাইন করেছে তার লাইভ গ্রিড -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Meal Types Grid View -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     @foreach (['breakfast', 'lunch', 'dinner', 'snacks'] as $type)
-                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col justify-between">
+                        <div class="bg-slate-50/80 p-4 rounded-none border border-slate-200/60 flex flex-col justify-between space-y-3">
                             <div>
-                                <p class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-2">
-                                    {{ $type }} Menu
+                                <p class="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2.5 capitalize flex items-center gap-1">
+                                    <span>{{ $type == 'breakfast' ? '🍳' : ($type == 'lunch' ? '🥗' : ($type == 'dinner' ? '🍲' : '🍎')) }}</span>
+                                    {{ $type }} Slot
                                 </p>
-                                <div class="space-y-1.5">
+                                <div class="space-y-2">
                                     @php
                                         $dayFoods = $day->planFoods->where('meal_type', $type);
                                     @endphp
                                     @forelse($dayFoods as $pFood)
-                                        <div
-                                            class="text-[11px] font-medium text-slate-700 bg-white p-2 rounded-lg border border-slate-200 shadow-sm flex justify-between items-center">
+                                        <div class="text-xs font-medium text-slate-700 bg-white p-2.5 rounded-none border border-slate-200/80 shadow-2xs flex justify-between items-center">
                                             <div>
-                                                <p class="font-bold text-slate-800">{{ $pFood->food->name }}</p>
-                                                <p class="text-slate-400 text-[10px] mt-0.5">{{ $pFood->servings }}x
-                                                    ({{ $pFood->food->calories * $pFood->servings }} kcal)</p>
+                                                <p class="font-extrabold text-slate-900 text-xs">{{ $pFood->food->name }}</p>
+                                                <p class="text-slate-400 text-[10px] font-semibold mt-0.5">
+                                                    {{ $pFood->servings }}x ({{ number_format($pFood->food->calories * $pFood->servings) }} kcal)
+                                                </p>
                                             </div>
 
                                             <form action="{{ route('plans.day.removeFood', $pFood->id) }}"
                                                 method="POST"
-                                                onsubmit="return confirm('Remove this food from this plan day?');">
+                                                onsubmit="return confirm('Remove this food item from Day {{ $day->day_number }}?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="text-slate-300 hover:text-red-500 transition-colors text-sm p-0.5"
-                                                    title="Remove Link">
+                                                    class="text-slate-300 hover:text-rose-500 hover:bg-rose-50 p-1 rounded-none transition-colors"
+                                                    title="Remove Item">
                                                     ✕
                                                 </button>
                                             </form>
                                         </div>
                                     @empty
-                                        <p class="text-[11px] text-slate-300 italic py-1">No items</p>
+                                        <p class="text-[11px] text-slate-400 italic py-1">No items assigned</p>
                                     @endforelse
                                 </div>
                             </div>
@@ -61,24 +72,23 @@
                     @endforeach
                 </div>
 
-                <!-- ২. সাধারণ ইউজার এই দিনের বক্সে নতুন খাবার পুশ করার জন্য লাইভ ফর্ম ইনপুট -->
+                <!-- Add Food Form -->
                 <form action="{{ route('plans.day.addFood', $day->id) }}" method="POST"
-                    class="bg-indigo-50/40 p-4 rounded-xl grid grid-cols-1 md:grid-cols-4 gap-4 items-end border border-indigo-100/30">
+                    class="bg-indigo-50/50 p-4 sm:p-5 rounded-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end border border-indigo-100">
                     @csrf
                     <div>
-                        <label class="block text-[11px] font-bold uppercase text-slate-500">Choose Global Food</label>
+                        <label class="block text-[10px] font-black uppercase text-slate-500 tracking-wider mb-1">Choose Global Food</label>
                         <select name="food_id"
-                            class="mt-1 block w-full rounded-xl border-slate-200 text-xs shadow-sm focus:ring-indigo-500">
+                            class="block w-full rounded-none border-slate-200 bg-white text-xs font-semibold text-slate-800 shadow-2xs focus:ring-indigo-500 py-2">
                             @foreach ($allFoods as $food)
-                                <option value="{{ $food->id }}">{{ $food->name }} ({{ $food->calories }} kcal /
-                                    {{ $food->serving_size }})</option>
+                                <option value="{{ $food->id }}">{{ $food->name }} ({{ $food->calories }} kcal / {{ $food->serving_size }})</option>
                             @endforeach
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold uppercase text-slate-500">Meal Timeline Slot</label>
+                        <label class="block text-[10px] font-black uppercase text-slate-500 tracking-wider mb-1">Meal Timeline Slot</label>
                         <select name="meal_type"
-                            class="mt-1 block w-full rounded-xl border-slate-200 text-xs shadow-sm focus:ring-indigo-500">
+                            class="block w-full rounded-none border-slate-200 bg-white text-xs font-semibold text-slate-800 shadow-2xs focus:ring-indigo-500 py-2">
                             <option value="breakfast">Breakfast</option>
                             <option value="lunch">Lunch</option>
                             <option value="dinner">Dinner</option>
@@ -86,13 +96,13 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold uppercase text-slate-500">Serving Multiplier</label>
+                        <label class="block text-[10px] font-black uppercase text-slate-500 tracking-wider mb-1">Serving Multiplier</label>
                         <input type="number" name="servings" value="1" step="0.5" min="0.5"
-                            class="mt-1 block w-full rounded-xl border-slate-200 text-xs shadow-sm focus:ring-indigo-500">
+                            class="block w-full rounded-none border-slate-200 bg-white text-xs font-semibold text-slate-800 shadow-2xs focus:ring-indigo-500 py-2">
                     </div>
                     <div>
                         <button type="submit"
-                            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold h-9 flex items-center justify-center rounded-xl transition shadow-md shadow-indigo-100">
+                            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold h-9 flex items-center justify-center rounded-none transition-all shadow-xs">
                             ＋ Link to Day {{ $day->day_number }}
                         </button>
                     </div>
