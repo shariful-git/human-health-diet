@@ -18,4 +18,9 @@ class PlanDayFood extends Model
     {
         return $this->belongsTo(Food::class);
     }
+
+    public function planDay()
+    {
+        return $this->belongsTo(PlanDay::class);
+    }
 }
