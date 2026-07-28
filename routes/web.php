@@ -1,15 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Auth\Middleware\Authenticate;
-use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\FitnessActivityController;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 
 Route::get('/', function () {
     return view('welcome');
