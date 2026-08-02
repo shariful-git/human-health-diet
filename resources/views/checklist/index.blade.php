@@ -16,7 +16,7 @@
             <!-- Rewards & Streak Stats Column -->
             <div class="md:col-span-1 space-y-5">
                 <!-- Rewards Points Card -->
-                <div class="relative overflow-hidden bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 p-6 rounded-none shadow-xl text-white text-center border border-amber-300/30">
+                <div class="relative overflow-hidden bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 p-6 rounded-2xl shadow-xl text-white text-center border border-amber-300/30">
                     <div class="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
                     <p class="text-xs uppercase font-black tracking-widest text-amber-100">Total Reward Points</p>
                     <h3 class="text-5xl font-black mt-2 font-mono drop-shadow-xs">⭐ {{ number_format($rewardPoints) }}</h3>
@@ -28,7 +28,7 @@
                 </div>
 
                 <!-- Streak Card -->
-                <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 p-6 rounded-none shadow-xl text-white text-center border border-slate-700/50 space-y-2">
+                <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 p-6 rounded-2xl shadow-xl text-white text-center border border-slate-700/50 space-y-2">
                     <span class="text-2xl">🔥</span>
                     <p class="text-xs uppercase font-black tracking-widest text-orange-400">Current Health Streak</p>
                     <h3 class="text-4xl font-black font-mono">
@@ -42,7 +42,7 @@
             </div>
 
             <!-- Daily Goals Checklist Card -->
-            <div class="md:col-span-2 bg-white p-7 rounded-none shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow flex flex-col justify-between">
+            <div class="md:col-span-2 bg-white p-7 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                         <div>
@@ -56,9 +56,9 @@
 
                     <div class="space-y-4">
                         <!-- Quest 1: Meals -->
-                        <div class="flex items-center justify-between p-4 bg-slate-50/80 rounded-none border border-slate-200/60 transition-all">
+                        <div class="flex items-center justify-between p-4 bg-slate-50/80 rounded-xl border border-slate-200/60 transition-all hover:border-slate-300">
                             <div class="flex items-center gap-3.5">
-                                <div class="w-10 h-10 rounded-none bg-orange-100/70 text-orange-600 flex items-center justify-center text-xl font-bold">
+                                <div class="w-10 h-10 rounded-xl bg-orange-100/70 text-orange-600 flex items-center justify-center text-xl font-bold">
                                     🍳
                                 </div>
                                 <div>
@@ -68,11 +68,11 @@
                             </div>
                             <div>
                                 @if($breakfastDone || $lunchDone || $dinnerDone || $snacksDone)
-                                    <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 font-extrabold text-xs px-3 py-1.5 rounded-none border border-emerald-200">
+                                    <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 font-extrabold text-xs px-3 py-1.5 rounded-xl border border-emerald-200">
                                         ✓ Completed
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1 bg-slate-200/60 text-slate-500 font-bold text-xs px-3 py-1.5 rounded-none">
+                                    <span class="inline-flex items-center gap-1 bg-slate-200/60 text-slate-500 font-bold text-xs px-3 py-1.5 rounded-xl">
                                         Pending
                                     </span>
                                 @endif
@@ -80,9 +80,9 @@
                         </div>
 
                         <!-- Quest 2: Hydration -->
-                        <div class="flex items-center justify-between p-4 bg-slate-50/80 rounded-none border border-slate-200/60 transition-all">
+                        <div class="flex items-center justify-between p-4 bg-slate-50/80 rounded-xl border border-slate-200/60 transition-all hover:border-slate-300">
                             <div class="flex items-center gap-3.5">
-                                <div class="w-10 h-10 rounded-none bg-cyan-100/70 text-cyan-600 flex items-center justify-center text-xl font-bold">
+                                <div class="w-10 h-10 rounded-xl bg-cyan-100/70 text-cyan-600 flex items-center justify-center text-xl font-bold">
                                     💧
                                 </div>
                                 <div>
@@ -92,11 +92,11 @@
                             </div>
                             <div>
                                 @if($waterDone)
-                                    <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 font-extrabold text-xs px-3 py-1.5 rounded-none border border-emerald-200">
+                                    <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 font-extrabold text-xs px-3 py-1.5 rounded-xl border border-emerald-200">
                                         ✓ Completed
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1 bg-slate-200/60 text-slate-500 font-bold text-xs px-3 py-1.5 rounded-none">
+                                    <span class="inline-flex items-center gap-1 bg-slate-200/60 text-slate-500 font-bold text-xs px-3 py-1.5 rounded-xl">
                                         Pending
                                     </span>
                                 @endif
@@ -104,9 +104,9 @@
                         </div>
 
                         <!-- Quest 3: Exercise -->
-                        <div class="flex items-center justify-between p-4 bg-slate-50/80 rounded-none border border-slate-200/60 transition-all">
+                        <div class="flex items-center justify-between p-4 bg-slate-50/80 rounded-xl border border-slate-200/60 transition-all hover:border-slate-300">
                             <div class="flex items-center gap-3.5">
-                                <div class="w-10 h-10 rounded-none bg-amber-100/70 text-amber-600 flex items-center justify-center text-xl font-bold">
+                                <div class="w-10 h-10 rounded-xl bg-amber-100/70 text-amber-600 flex items-center justify-center text-xl font-bold">
                                     🏃‍♂️
                                 </div>
                                 <div>
@@ -116,11 +116,11 @@
                             </div>
                             <div>
                                 @if($exerciseDone)
-                                    <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 font-extrabold text-xs px-3 py-1.5 rounded-none border border-emerald-200">
+                                    <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 font-extrabold text-xs px-3 py-1.5 rounded-xl border border-emerald-200">
                                         ✓ Completed
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1 bg-slate-200/60 text-slate-500 font-bold text-xs px-3 py-1.5 rounded-none">
+                                    <span class="inline-flex items-center gap-1 bg-slate-200/60 text-slate-500 font-bold text-xs px-3 py-1.5 rounded-xl">
                                         Pending
                                     </span>
                                 @endif
@@ -131,7 +131,7 @@
 
                 <div class="mt-8">
                     @if ($dailyLog->is_completed)
-                        <div class="w-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-extrabold py-4 rounded-none text-center text-sm flex items-center justify-center gap-2 shadow-2xs">
+                        <div class="w-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-extrabold py-4 rounded-xl text-center text-sm flex items-center justify-center gap-2 shadow-2xs">
                             <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             <span>🎉 Day Successfully Completed & Rewards Logged!</span>
                         </div>
@@ -139,7 +139,7 @@
                         <form action="{{ route('checklist.complete') }}" method="POST">
                             @csrf
                             <button type="submit"
-                                class="w-full bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-extrabold py-4 rounded-none text-center text-sm shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2">
+                                class="w-full bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-extrabold py-4 rounded-xl text-center text-sm shadow-md shadow-emerald-600/20 transition-all duration-200 flex items-center justify-center gap-2 hover:scale-[1.01]">
                                 🚀 Complete My Day & Claim Reward Points
                             </button>
                         </form>

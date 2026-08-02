@@ -46,7 +46,7 @@ class ProfileController extends Controller
             $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
         }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('success', '🎉 Health parameters updated! Your BMI, BMR, and Calorie targets have been recalculated.');
     }
 
     /**

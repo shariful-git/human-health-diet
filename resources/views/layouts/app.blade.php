@@ -26,6 +26,7 @@
 <body class="font-sans antialiased bg-slate-50/70 text-slate-900 selection:bg-emerald-600 selection:text-white min-h-screen flex flex-col">
     <div class="min-h-screen flex flex-col">
         @include('layouts.navigation')
+        <x-toast />
 
         <!-- Page Heading -->
         @isset($header)

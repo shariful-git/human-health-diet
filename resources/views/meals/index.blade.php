@@ -18,13 +18,13 @@
 
         <!-- Column 1: Plan Blueprint Menu -->
         <div class="space-y-6">
-            <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-6 rounded-none shadow-lg border border-indigo-500/20">
+            <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-6 rounded-2xl shadow-lg border border-indigo-500/20">
                 <div class="flex items-center justify-between">
                     <div>
                         <span class="text-[10px] font-black uppercase tracking-widest text-indigo-400">Blueprint Target</span>
                         <h3 class="text-lg font-black text-white mt-0.5">📋 Recommended Challenge Menu</h3>
                     </div>
-                    <span class="text-xs font-extrabold bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 px-3 py-1 rounded-full">
+                    <span class="text-xs font-extrabold bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 px-3 py-1 rounded-full shadow-xs">
                         Active Plan
                     </span>
                 </div>
@@ -32,7 +32,7 @@
             </div>
 
             @foreach (['breakfast', 'lunch', 'dinner', 'snacks'] as $type)
-                <div class="bg-white p-6 rounded-none shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-4">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <div class="flex items-center gap-2">
                             <span class="text-base">{{ $type == 'breakfast' ? '🍳' : ($type == 'lunch' ? '🥗' : ($type == 'dinner' ? '🍲' : '🍎')) }}</span>
@@ -44,7 +44,7 @@
                     @if (isset($plannedMeals[$type]) && $plannedMeals[$type]->count() > 0)
                         <div class="space-y-2.5">
                             @foreach ($plannedMeals[$type] as $pFood)
-                                <div class="flex justify-between items-center bg-slate-50/80 p-3.5 rounded-none border border-slate-200/60 hover:border-slate-300 transition-all">
+                                <div class="flex justify-between items-center bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/60 hover:border-slate-300 transition-all">
                                     <div>
                                         <p class="font-extrabold text-slate-800 text-sm">{{ $pFood->food->name }}</p>
                                         <div class="flex items-center gap-2 text-[11px] text-slate-500 mt-0.5">
@@ -56,7 +56,7 @@
                                         </div>
                                     </div>
                                     <a href="{{ route('meals.log.plan', $pFood->id) }}"
-                                        class="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-3 py-1.5 rounded-none shadow-xs transition-all">
+                                        class="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-3.5 py-1.5 rounded-xl shadow-xs transition-all hover:scale-105">
                                         <span>＋ Eat This</span>
                                     </a>
                                 </div>
@@ -71,20 +71,20 @@
 
         <!-- Column 2: Actual Intake Consumption -->
         <div class="space-y-6">
-            <div class="bg-gradient-to-br from-emerald-700 via-teal-800 to-slate-900 text-white p-6 rounded-none shadow-lg border border-emerald-500/20 flex justify-between items-center">
+            <div class="bg-gradient-to-br from-emerald-700 via-teal-800 to-slate-900 text-white p-6 rounded-2xl shadow-lg border border-emerald-500/20 flex justify-between items-center">
                 <div>
                     <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300">Verified Consumption</span>
                     <h3 class="text-lg font-black text-white mt-0.5">🍳 Actual Intake Logs</h3>
                     <p class="text-xs text-emerald-200/80 mt-1">Real-time record of consumed nutrients today.</p>
                 </div>
-                <div class="text-right bg-white/10 backdrop-blur-md px-4 py-2 rounded-none border border-white/15">
+                <div class="text-right bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/15 shadow-xs">
                     <p class="text-2xl font-black text-white font-mono">{{ number_format($summary['calories']) }}</p>
                     <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-200">Kcal Consumed</p>
                 </div>
             </div>
 
             @foreach (['breakfast', 'lunch', 'dinner', 'snacks'] as $type)
-                <div class="bg-white p-6 rounded-none shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-4">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <div class="flex items-center gap-2">
                             <span class="text-base">{{ $type == 'breakfast' ? '🍳' : ($type == 'lunch' ? '🥗' : ($type == 'dinner' ? '🍲' : '🍎')) }}</span>

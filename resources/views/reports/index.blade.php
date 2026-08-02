@@ -9,12 +9,12 @@
             </div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('reports.csv') }}"
-                    class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-3.5 py-2.5 rounded-none shadow-xs transition-all">
+                    class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl shadow-xs transition-all hover:scale-105">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     <span>Export Excel (CSV)</span>
                 </a>
                 <a href="{{ route('reports.pdf') }}" target="_blank"
-                    class="inline-flex items-center gap-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold px-3.5 py-2.5 rounded-none shadow-xs transition-all">
+                    class="inline-flex items-center gap-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl shadow-xs transition-all hover:scale-105">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                     <span>Export PDF Report</span>
                 </a>
@@ -27,10 +27,10 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Calorie Balance Chart -->
-                <div class="bg-white p-7 rounded-none shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
+                <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-none bg-rose-50 text-rose-600 flex items-center justify-center text-xl font-bold">
+                            <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl font-bold shadow-2xs">
                                 🔥
                             </div>
                             <div>
@@ -45,10 +45,10 @@
                 </div>
 
                 <!-- Water Intake Trend Chart -->
-                <div class="bg-white p-7 rounded-none shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
+                <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-none bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl font-bold">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl font-bold shadow-2xs">
                                 💧
                             </div>
                             <div>
