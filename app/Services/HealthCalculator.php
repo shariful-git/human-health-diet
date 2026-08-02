@@ -6,7 +6,12 @@ class HealthCalculator
 {
     public static function calculateBmi(float $weight, float $heightCm): float
     {
+        if ($heightCm <= 0 || $weight <= 0) {
+            return 0.0;
+        }
+
         $heightMeters = $heightCm / 100;
+
         return round($weight / ($heightMeters * $heightMeters), 2);
     }
 
@@ -29,6 +34,7 @@ class HealthCalculator
         ];
 
         $multiplier = $multipliers[$activityLevel] ?? 1.2;
+
         return (int) ($bmr * $multiplier);
     }
 

@@ -7,7 +7,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
@@ -18,6 +17,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $profile = $user->profile;
+
         return view('profile.edit', compact('user', 'profile'));
     }
 
@@ -37,12 +37,12 @@ class ProfileController extends Controller
 
         $profileData = array_filter(
             $request->safe()->only([
-                'gender', 'age', 'height', 'weight', 'activity_level', 'goal', 'medical_conditions'
+                'gender', 'age', 'height', 'weight', 'activity_level', 'goal', 'medical_conditions',
             ]),
-            fn($val) => !is_null($val)
+            fn ($val) => ! is_null($val)
         );
 
-        if (!empty($profileData)) {
+        if (! empty($profileData)) {
             $user->profile()->updateOrCreate(['user_id' => $user->id], $profileData);
         }
 

@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChecklistController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FitnessActivityController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PlanController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Auth\Middleware\Authenticate;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ChecklistController;
-use App\Http\Controllers\FitnessActivityController;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,4 +49,4 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::delete('/plans/day-food/{itemId}', [PlanController::class, 'removeFoodFromDay'])->name('plans.day.removeFood');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

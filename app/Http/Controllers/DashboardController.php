@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\DailyLog;
-use App\Models\PlanDay;
 use App\Models\MealLog;
+use App\Models\PlanDay;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -16,7 +15,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
 
-        if (!$profile) {
+        if (! $profile) {
             return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
         }
 
@@ -39,16 +38,16 @@ class DashboardController extends Controller
         $completedMeals = MealLog::where('user_id', $user->id)->where('date', $today)->where('status', 'completed')->with('food')->get();
         foreach ($completedMeals as $log) {
             $summary['calories'] += $log->calculated_calories;
-            $summary['protein']  += ($log->food->protein * $log->servings);
-            $summary['carbs']    += ($log->food->carbohydrate * $log->servings);
-            $summary['fat']      += ($log->food->fat * $log->servings);
+            $summary['protein'] += ($log->food->protein * $log->servings);
+            $summary['carbs'] += ($log->food->carbohydrate * $log->servings);
+            $summary['fat'] += ($log->food->fat * $log->servings);
         }
 
         $calorieTarget = $profile->daily_calorie_target ?? 2000;
-        $caloriePercentage = min(($summary['calories'] / $calorieTarget) * 100, 100);
+        $caloriePercentage = $calorieTarget > 0 ? min(($summary['calories'] / $calorieTarget) * 100, 100) : 0;
 
         $waterGoal = $currentDayPlan ? $currentDayPlan->water_goal_ml : 3000;
-        $waterPercentage = min(($todayLog->water_intake_ml / $waterGoal) * 100, 100);
+        $waterPercentage = $waterGoal > 0 ? min(($todayLog->water_intake_ml / $waterGoal) * 100, 100) : 0;
 
         return view('dashboard', compact(
             'profile',

@@ -4,9 +4,9 @@ namespace App\Filament\Resources\Users\Tables;
 
 use App\Models\User;
 use Filament\Actions;
-use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 
 class UsersTable
 {
@@ -27,8 +27,8 @@ class UsersTable
                 TextColumn::make('is_admin')
                     ->label('Role')
                     ->badge()
-                    ->state(fn(User $record) => $record->is_admin ? 'Admin' : 'General User')
-                    ->color(fn(string $state) => $state === 'Admin' ? 'danger' : 'success'),
+                    ->state(fn (User $record) => $record->is_admin ? 'Admin' : 'General User')
+                    ->color(fn (string $state) => $state === 'Admin' ? 'danger' : 'success'),
 
                 TextColumn::make('created_at')
                     ->label('Created')

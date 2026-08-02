@@ -2,14 +2,14 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\User;
-use App\Models\Plan;
-use App\Models\Food;
 use App\Models\DailyLog;
+use App\Models\Food;
+use App\Models\Plan;
+use App\Models\User;
+use Carbon\Carbon;
 use Filament\Support\Enums\IconPosition;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Carbon\Carbon;
 
 class AdminStatsOverview extends BaseWidget
 {

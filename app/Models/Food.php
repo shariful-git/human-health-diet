@@ -8,5 +8,5 @@ class Food extends Model
 {
     protected $table = 'foods';
 
-    protected $fillable = ['name', 'category', 'calories', 'protein', 'carbohydrate', 'fat', 'fiber', 'suger', 'serving_size', 'is_admin_approved'];
+    protected $fillable = ['name', 'category', 'calories', 'protein', 'carbohydrate', 'fat', 'fiber', 'sugar', 'sodium', 'vitamins', 'minerals', 'serving_size', 'is_admin_approved'];
 }

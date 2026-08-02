@@ -90,12 +90,12 @@ class PlanForm
                                     ->reorderable(),
 
                             ])
-                            ->itemLabel(fn(array $state): ?string => isset($state['day_number']) ? 'Day ' . $state['day_number'] : null)
+                            ->itemLabel(fn (array $state): ?string => isset($state['day_number']) ? 'Day '.$state['day_number'] : null)
                             ->collapsible()
                             ->cloneable()
                             ->reorderable(),
 
-                    ])
+                    ]),
 
             ]);
     }

@@ -15,6 +15,6 @@ class MealLog extends Model
 
     public function dailyLog()
     {
-        return $this->belongsTo(DailyLog::class);
+        return $this->belongsTo(DailyLog::class, 'user_id', 'user_id')->whereColumn('daily_logs.date', 'meal_logs.date');
     }
 }

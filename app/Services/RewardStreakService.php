@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Models\RewardPoint;
+use App\Models\User;
 use App\Models\UserStreak;
 use Carbon\Carbon;
 
@@ -12,11 +12,11 @@ class RewardStreakService
     public static function awardPoints(User $user, string $actionType)
     {
         $pointsMatrix = [
-            'meal_complete'     => 5,
+            'meal_complete' => 5,
             'exercise_complete' => 10,
-            'complete_day'      => 20,
-            'complete_week'     => 100,
-            'complete_plan'     => 500,
+            'complete_day' => 20,
+            'complete_week' => 100,
+            'complete_plan' => 500,
         ];
 
         $points = $pointsMatrix[$actionType] ?? 0;
@@ -25,8 +25,8 @@ class RewardStreakService
         if ($points > 0) {
             RewardPoint::create([
                 'user_id' => $user->id,
-                'points'  => $points,
-                'reason'  => $reason,
+                'points' => $points,
+                'reason' => $reason,
             ]);
         }
     }

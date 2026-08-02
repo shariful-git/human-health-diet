@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\DailyLog;
 use App\Models\Exercise;
 use App\Models\ExerciseLog;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FitnessActivityController extends Controller
 {
@@ -16,13 +16,13 @@ class FitnessActivityController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
 
-        if (!$profile) {
+        if (! $profile) {
             return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
         }
-        
+
         $today = Carbon::today()->toDateString();
         $dailyLog = DailyLog::firstOrCreate(['user_id' => Auth::id(), 'date' => $today]);
-        
+
         $exerciseLogs = $dailyLog->exerciseLogs()->with('exercise')->get();
         $allExercises = Exercise::all();
 
@@ -33,7 +33,7 @@ class FitnessActivityController extends Controller
     public function updateWater(Request $request)
     {
         $request->validate(['amount' => 'required|integer|in:250,500,-250']);
-        
+
         $today = Carbon::today()->toDateString();
         $dailyLog = DailyLog::firstOrCreate(['user_id' => Auth::id(), 'date' => $today]);
 
@@ -63,7 +63,7 @@ class FitnessActivityController extends Controller
             'exercise_id' => $exercise->id,
             'duration_minutes' => $request->duration_minutes,
             'calculated_calories_burn' => $burn,
-            'is_completed' => true
+            'is_completed' => true,
         ]);
 
         return redirect()->route('fitness.index')->with('success', 'Exercise logged successfully!');

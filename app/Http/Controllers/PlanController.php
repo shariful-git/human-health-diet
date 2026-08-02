@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
-use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\PlanDay;
 use App\Models\PlanDayFood;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
 {
@@ -32,28 +33,32 @@ class PlanController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $plan = Plan::create([
-            'user_id' => Auth::id(),
-            'name' => $request->name,
-            'description' => $request->description,
-            'duration_days' => $request->duration_days,
-            'plan_type' => 'custom',
-            'is_active' => true
-        ]);
-
-        for ($i = 1; $i <= $request->duration_days; $i++) {
-            PlanDay::create([
-                'plan_id' => $plan->id,
-                'day_number' => $i,
-                'breakfast_suggestion' => 'Standard Balanced Breakfast',
-                'lunch_suggestion' => 'Rice, Protein (Chicken/Fish), Veggies',
-                'dinner_suggestion' => 'Light Protein & Salad',
-                'snacks_suggestion' => 'Nuts or Fruit',
-                'exercise_suggestion' => '30 Mins Brisk Walk',
-                'water_goal_ml' => 3000,
-                'sleep_goal_hours' => 8
+        $plan = DB::transaction(function () use ($request) {
+            $plan = Plan::create([
+                'user_id' => Auth::id(),
+                'name' => $request->name,
+                'description' => $request->description,
+                'duration_days' => $request->duration_days,
+                'plan_type' => 'custom',
+                'is_active' => true,
             ]);
-        }
+
+            for ($i = 1; $i <= $request->duration_days; $i++) {
+                PlanDay::create([
+                    'plan_id' => $plan->id,
+                    'day_number' => $i,
+                    'breakfast_suggestion' => 'Standard Balanced Breakfast',
+                    'lunch_suggestion' => 'Rice, Protein (Chicken/Fish), Veggies',
+                    'dinner_suggestion' => 'Light Protein & Salad',
+                    'snacks_suggestion' => 'Nuts or Fruit',
+                    'exercise_suggestion' => '30 Mins Brisk Walk',
+                    'water_goal_ml' => 3000,
+                    'sleep_goal_hours' => 8,
+                ]);
+            }
+
+            return $plan;
+        });
 
         return redirect()->route('plans.edit.days', $plan->id)->with('success', 'Plan created! Now configure daily meals.');
     }
@@ -115,7 +120,7 @@ class PlanController extends Controller
             'snacks_suggestion',
             'exercise_suggestion',
             'water_goal_ml',
-            'sleep_goal_hours'
+            'sleep_goal_hours',
         ]));
 
         return redirect()->back()->with('success', "Day {$day->day_number} settings updated successfully!");
@@ -125,14 +130,14 @@ class PlanController extends Controller
     {
         $plan = Plan::where(function ($q) {
             $q->where('plan_type', 'default')
-              ->orWhere('user_id', Auth::id());
+                ->orWhere('user_id', Auth::id());
         })->where('is_active', true)->findOrFail($id);
 
         $user = Auth::user();
 
         $user->update([
             'active_plan_id' => $plan->id,
-            'current_plan_day_number' => 1
+            'current_plan_day_number' => 1,
         ]);
 
         return redirect()->route('dashboard')->with('success', "🎯 Successfully enrolled in: {$plan->name}. Welcome to Day 1!");

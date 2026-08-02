@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlanDayFood extends Model
 {
     protected $table = 'plan_day_foods';
+
     protected $fillable = ['plan_day_id', 'food_id', 'meal_type', 'servings'];
 
     public function day()

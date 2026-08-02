@@ -16,7 +16,7 @@ class PlanDay extends Model
         'exercise_suggestion',
         'water_goal_ml',
         'sleep_goal_hours',
-        'notes'
+        'notes',
     ];
 
     public function plan()
@@ -28,6 +28,4 @@ class PlanDay extends Model
     {
         return $this->hasMany(PlanDayFood::class, 'plan_day_id');
     }
-
-    
 }

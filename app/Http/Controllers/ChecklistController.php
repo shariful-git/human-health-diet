@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\DailyLog;
 use App\Models\MealLog;
 use App\Models\PlanDay;
 use App\Services\RewardStreakService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ChecklistController extends Controller
 {
@@ -20,9 +19,9 @@ class ChecklistController extends Controller
         $dailyLog = DailyLog::firstOrCreate(['user_id' => $user->id, 'date' => $today]);
 
         $breakfastDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'breakfast')->where('status', 'completed')->exists();
-        $lunchDone     = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'lunch')->where('status', 'completed')->exists();
-        $dinnerDone    = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'dinner')->where('status', 'completed')->exists();
-        $snacksDone    = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'snacks')->where('status', 'completed')->exists();
+        $lunchDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'lunch')->where('status', 'completed')->exists();
+        $dinnerDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'dinner')->where('status', 'completed')->exists();
+        $snacksDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'snacks')->where('status', 'completed')->exists();
 
         $waterGoal = 3000;
         if ($user->active_plan_id) {
@@ -34,17 +33,12 @@ class ChecklistController extends Controller
             }
         }
 
-        $rewardPoints = 0;
-        if ($user->rewardPoints) {
-            foreach ($user->rewardPoints as $rewardPoint) {
-                $rewardPoints += $rewardPoint->points;
-            }
-        }
+        $rewardPoints = (int) $user->rewardPoints()->sum('points');
 
         $waterDone = $dailyLog->water_intake_ml >= $waterGoal;
 
         $exerciseDone = $dailyLog->total_calories_burn > 0;
-        $sleepDone    = $dailyLog->sleep_hours >= 7;
+        $sleepDone = $dailyLog->sleep_hours >= 7;
 
         return view('checklist.index', compact(
             'dailyLog',
@@ -81,11 +75,11 @@ class ChecklistController extends Controller
         }
 
         $breakfastDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'breakfast')->where('status', 'completed')->exists();
-        $lunchDone     = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'lunch')->where('status', 'completed')->exists();
-        $dinnerDone    = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'dinner')->where('status', 'completed')->exists();
-        $waterDone     = $dailyLog->water_intake_ml >= $waterGoal;
+        $lunchDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'lunch')->where('status', 'completed')->exists();
+        $dinnerDone = MealLog::where('user_id', $user->id)->where('date', $today)->where('meal_type', 'dinner')->where('status', 'completed')->exists();
+        $waterDone = $dailyLog->water_intake_ml >= $waterGoal;
 
-        if (!$breakfastDone || !$lunchDone || !$dinnerDone || !$waterDone) {
+        if (! $breakfastDone || ! $lunchDone || ! $dinnerDone || ! $waterDone) {
             return redirect()->back()->with('error', 'You must complete your main daily meals and reach your water goal before finalizing the day.');
         }
 
@@ -103,8 +97,9 @@ class ChecklistController extends Controller
                 RewardStreakService::awardPoints($user, 'complete_plan');
                 $user->update([
                     'active_plan_id' => null,
-                    'current_plan_day_number' => 1
+                    'current_plan_day_number' => 1,
                 ]);
+
                 return redirect()->route('plans.index')->with('success', '🎉 AMAZING! You have completed the entire multi-day diet blueprint! +500 Bonus Points Logged!');
             }
         }

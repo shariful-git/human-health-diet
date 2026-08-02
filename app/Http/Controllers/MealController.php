@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\DailyLog;
 use App\Models\MealLog;
 use App\Models\PlanDay;
 use App\Models\PlanDayFood;
-use App\Models\DailyLog;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class MealController extends Controller
 {
@@ -43,9 +42,9 @@ class MealController extends Controller
         $completedMeals = MealLog::where('user_id', $user->id)->where('date', $today)->with('food')->get();
         foreach ($completedMeals as $log) {
             $summary['calories'] += $log->calculated_calories;
-            $summary['protein']  += ($log->food->protein * $log->servings);
-            $summary['carbs']    += ($log->food->carbohydrate * $log->servings);
-            $summary['fat']      += ($log->food->fat * $log->servings);
+            $summary['protein'] += ($log->food->protein * $log->servings);
+            $summary['carbs'] += ($log->food->carbohydrate * $log->servings);
+            $summary['fat'] += ($log->food->fat * $log->servings);
         }
 
         return view('meals.index', compact('loggedMeals', 'plannedMeals', 'summary', 'user', 'dailyLog'));
@@ -66,7 +65,7 @@ class MealController extends Controller
             'meal_type' => $planFood->meal_type,
             'servings' => $planFood->servings,
             'calculated_calories' => $calculatedCalories,
-            'status' => 'completed'
+            'status' => 'completed',
         ]);
 
         $totalCalories = MealLog::where('user_id', $user->id)->where('date', $today)->sum('calculated_calories');

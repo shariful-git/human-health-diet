@@ -22,13 +22,13 @@ class ExerciseLog extends Model
     {
         static::saved(function ($exerciseLog) {
             $exerciseLog->dailyLog->update([
-                'total_calories_burn' => $exerciseLog->dailyLog->exerciseLogs()->sum('calculated_calories_burn')
+                'total_calories_burn' => $exerciseLog->dailyLog->exerciseLogs()->sum('calculated_calories_burn'),
             ]);
         });
 
         static::deleted(function ($exerciseLog) {
             $exerciseLog->dailyLog->update([
-                'total_calories_burn' => $exerciseLog->dailyLog->exerciseLogs()->sum('calculated_calories_burn')
+                'total_calories_burn' => $exerciseLog->dailyLog->exerciseLogs()->sum('calculated_calories_burn'),
             ]);
         });
     }

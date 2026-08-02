@@ -12,7 +12,7 @@ class ProfileController extends Controller
     {
         $profile = Auth::user()->profile;
 
-        if (!$profile) {
+        if (! $profile) {
             return response()->json(['message' => 'Profile not created yet.'], 404);
         }
 
@@ -28,7 +28,7 @@ class ProfileController extends Controller
             'weight' => 'required|numeric|min:30|max:300',  // in kg
             'activity_level' => 'required|in:low,medium,high',
             'goal' => 'required|in:weight_loss,weight_gain,maintain,muscle_gain',
-            'medical_conditions' => 'nullable|array'
+            'medical_conditions' => 'nullable|array',
         ]);
 
         $profile = Auth::user()->profile()->updateOrCreate(
@@ -38,7 +38,7 @@ class ProfileController extends Controller
 
         return response()->json([
             'message' => 'Profile updated successfully!',
-            'data' => $profile
+            'data' => $profile,
         ], 200);
     }
 }

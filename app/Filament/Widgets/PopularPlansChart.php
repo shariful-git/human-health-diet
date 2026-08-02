@@ -7,7 +7,8 @@ use Filament\Widgets\ChartWidget;
 
 class PopularPlansChart extends ChartWidget
 {
-    protected int | string | array $columnSpan = 'md';
+    protected int|string|array $columnSpan = 'md';
+
     protected ?string $heading = 'Diet Plan Distribution';
 
     protected function getData(): array

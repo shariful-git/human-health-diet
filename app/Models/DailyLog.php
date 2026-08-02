@@ -15,7 +15,7 @@ class DailyLog extends Model
 
     public function mealLogs()
     {
-        return $this->hasMany(MealLog::class);
+        return $this->hasMany(MealLog::class, 'user_id', 'user_id')->whereColumn('meal_logs.date', 'daily_logs.date');
     }
 
     public function exerciseLogs()

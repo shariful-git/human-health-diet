@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Symfony\Component\HttpFoundation\StreamedResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\DailyLog;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ReportController extends Controller
 {
@@ -15,7 +14,7 @@ class ReportController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
 
-        if (!$profile) {
+        if (! $profile) {
             return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
         }
 
@@ -53,11 +52,11 @@ class ReportController extends Controller
             ->get();
 
         $headers = [
-            'Content-type'        => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename=health_report_' . now()->format('Y-m-d') . '.csv',
-            'Pragma'              => 'no-cache',
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires'             => '0'
+            'Content-type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename=health_report_'.now()->format('Y-m-d').'.csv',
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
         ];
 
         $columns = ['Date', 'Total Calories Intake (kcal)', 'Total Calories Burn (kcal)', 'Water Intake (ml)', 'Sleep (hours)', 'Steps', 'Status'];
@@ -66,7 +65,7 @@ class ReportController extends Controller
             $file = fopen('php://output', 'w');
 
             // UTF-8 BOM for Excel compatibility
-            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
 
             fputcsv($file, $columns);
 
@@ -78,7 +77,7 @@ class ReportController extends Controller
                     $log->water_intake_ml,
                     $log->sleep_hours,
                     $log->steps,
-                    $log->is_completed ? 'Completed' : 'Incomplete'
+                    $log->is_completed ? 'Completed' : 'Incomplete',
                 ]);
             }
 
