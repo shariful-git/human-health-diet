@@ -3,7 +3,8 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
                 <h2 class="font-extrabold text-xl text-slate-900 tracking-tight flex items-center gap-2">
-                    🍳 Meal Planning & Daily Intake Journal
+                    <svg class="w-6 h-6 text-emerald-600 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    Meal Planning & Daily Intake Journal
                 </h2>
                 <p class="text-xs font-semibold text-slate-500 mt-0.5">Compare your scheduled blueprint menu against logged intake.</p>
             </div>
@@ -22,7 +23,10 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <span class="text-[10px] font-black uppercase tracking-widest text-indigo-400">Blueprint Target</span>
-                        <h3 class="text-lg font-black text-white mt-0.5">📋 Recommended Challenge Menu</h3>
+                        <h3 class="text-lg font-black text-white mt-0.5 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-indigo-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                            Recommended Challenge Menu
+                        </h3>
                     </div>
                     <span class="text-xs font-extrabold bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 px-3 py-1 rounded-full shadow-xs">
                         Active Plan
@@ -35,7 +39,15 @@
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <div class="flex items-center gap-2">
-                            <span class="text-base">{{ $type == 'breakfast' ? '🍳' : ($type == 'lunch' ? '🥗' : ($type == 'dinner' ? '🍲' : '🍎')) }}</span>
+                            @if($type == 'breakfast')
+                                <svg class="w-4 h-4 text-amber-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                            @elseif($type == 'lunch')
+                                <svg class="w-4 h-4 text-emerald-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            @elseif($type == 'dinner')
+                                <svg class="w-4 h-4 text-indigo-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                            @else
+                                <svg class="w-4 h-4 text-rose-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                            @endif
                             <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider">{{ $type }} Blueprint</h4>
                         </div>
                         <span class="text-[10px] font-bold text-slate-400 uppercase">Recommended</span>
@@ -57,7 +69,8 @@
                                     </div>
                                     <a href="{{ route('meals.log.plan', $pFood->id) }}"
                                         class="inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-3.5 py-1.5 rounded-xl shadow-xs transition-all hover:scale-105">
-                                        <span>＋ Eat This</span>
+                                        <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                                        <span>Eat This</span>
                                     </a>
                                 </div>
                             @endforeach
@@ -74,7 +87,10 @@
             <div class="bg-gradient-to-br from-emerald-700 via-teal-800 to-slate-900 text-white p-6 rounded-2xl shadow-lg border border-emerald-500/20 flex justify-between items-center">
                 <div>
                     <span class="text-[10px] font-black uppercase tracking-widest text-emerald-300">Verified Consumption</span>
-                    <h3 class="text-lg font-black text-white mt-0.5">🍳 Actual Intake Logs</h3>
+                    <h3 class="text-lg font-black text-white mt-0.5 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        Actual Intake Logs
+                    </h3>
                     <p class="text-xs text-emerald-200/80 mt-1">Real-time record of consumed nutrients today.</p>
                 </div>
                 <div class="text-right bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/15 shadow-xs">
@@ -87,7 +103,15 @@
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 space-y-4">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                         <div class="flex items-center gap-2">
-                            <span class="text-base">{{ $type == 'breakfast' ? '🍳' : ($type == 'lunch' ? '🥗' : ($type == 'dinner' ? '🍲' : '🍎')) }}</span>
+                            @if($type == 'breakfast')
+                                <svg class="w-4 h-4 text-amber-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                            @elseif($type == 'lunch')
+                                <svg class="w-4 h-4 text-emerald-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            @elseif($type == 'dinner')
+                                <svg class="w-4 h-4 text-indigo-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                            @else
+                                <svg class="w-4 h-4 text-rose-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                            @endif
                             <h4 class="text-xs font-black text-slate-900 uppercase tracking-wider">{{ $type }} Consumed</h4>
                         </div>
                         <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full uppercase">Logged</span>

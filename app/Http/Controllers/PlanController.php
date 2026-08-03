@@ -140,7 +140,7 @@ class PlanController extends Controller
             'current_plan_day_number' => 1,
         ]);
 
-        return redirect()->route('dashboard')->with('success', "🎯 Successfully enrolled in: {$plan->name}. Welcome to Day 1!");
+        return redirect()->route('dashboard')->with('success', "Successfully enrolled in: {$plan->name}. Welcome to Day 1!");
     }
 
     public function destroy($id)

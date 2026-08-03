@@ -76,7 +76,10 @@
                     </div>
                     <p class="text-xs font-extrabold uppercase tracking-wider text-rose-200">Current Health Streak</p>
                     <div class="flex items-baseline gap-2 mt-2">
-                        <h3 class="text-4xl font-black tracking-tight">🔥 {{ $user->streak?->current_streak ?? 0 }}</h3>
+                        <h3 class="text-4xl font-black tracking-tight flex items-center">
+                            <svg class="w-8 h-8 text-rose-400 inline-block me-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 1-4 4-6 1.236 1.6 3.5 4.6 3.5 7.5 0 1.268-.396 2.37-1.071 3.238.455.518.728 1.192.728 1.919z"/></svg>
+                            {{ $user->streak?->current_streak ?? 0 }}
+                        </h3>
                         <span class="text-xs text-rose-300 font-bold">Days</span>
                     </div>
                     <div class="mt-3">
@@ -95,7 +98,7 @@
                         <div class="flex justify-between items-center mb-4">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-lg shadow-2xs">
-                                    🍳
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 1-4 4-6 1.236 1.6 3.5 4.6 3.5 7.5 0 1.268-.396 2.37-1.071 3.238.455.518.728 1.192.728 1.919z"/></svg>
                                 </div>
                                 <div>
                                     <h4 class="text-base font-extrabold text-slate-900">Calories Budget</h4>
@@ -142,7 +145,7 @@
                         <div class="flex justify-between items-center mb-4">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center font-bold text-lg shadow-2xs">
-                                    💧
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
                                 </div>
                                 <div>
                                     <h4 class="text-base font-extrabold text-slate-900">Volumetric Hydration</h4>
@@ -195,8 +198,17 @@
                         @foreach(['breakfast', 'lunch', 'dinner', 'snacks'] as $mealType)
                             <div class="bg-white/5 p-4 rounded-xl border border-white/10 hover:border-indigo-400/40 hover:bg-white/10 transition-all duration-200 space-y-2">
                                 <div class="flex items-center justify-between">
-                                    <p class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider capitalize">
-                                        {{ $mealType == 'breakfast' ? '🍳' : ($mealType == 'lunch' ? '🥗' : ($mealType == 'dinner' ? '🍲' : '🍎')) }} {{ $mealType }}
+                                    <p class="text-xs font-extrabold text-indigo-300 uppercase tracking-wider capitalize flex items-center gap-1.5">
+                                        @if($mealType == 'breakfast')
+                                            <svg class="w-4 h-4 text-amber-400 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                                        @elseif($mealType == 'lunch')
+                                            <svg class="w-4 h-4 text-emerald-400 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                        @elseif($mealType == 'dinner')
+                                            <svg class="w-4 h-4 text-indigo-400 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                                        @else
+                                            <svg class="w-4 h-4 text-rose-400 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                                        @endif
+                                        <span>{{ $mealType }}</span>
                                     </p>
                                     <span class="text-[10px] text-slate-400 uppercase font-bold">Planned</span>
                                 </div>
@@ -224,8 +236,8 @@
                 </div>
             @else
                 <div class="bg-white p-10 rounded-2xl border border-dashed border-slate-300 text-center shadow-2xs space-y-3">
-                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto text-xl font-bold">
-                        📋
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto shadow-2xs">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
                     </div>
                     <h4 class="text-base font-extrabold text-slate-900">No Active Diet Plan Selected</h4>
                     <p class="text-xs text-slate-500 max-w-md mx-auto">Select or design a custom challenge plan to generate real-time dietary target menus for your daily routines.</p>

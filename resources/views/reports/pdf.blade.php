@@ -34,7 +34,10 @@
 
     <div
         class="no-print max-w-4xl mx-auto mb-6 flex justify-between items-center bg-slate-900 text-white p-4 rounded-none shadow">
-        <span class="text-xs font-bold">📄 Print Preview ready. Press Ctrl+P or Click Print to Save as PDF.</span>
+        <span class="text-xs font-bold flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-400 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Print Preview ready. Press Ctrl+P or Click Print to Save as PDF.
+        </span>
         <div class="flex gap-2">
             <button onclick="window.print()"
                 class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 text-xs font-bold rounded-none transition">Print / Save PDF</button>
@@ -74,7 +77,10 @@
             </div>
         </div>
 
-        <h3 class="text-sm font-extrabold text-slate-800 mb-3 uppercase tracking-wider">📋 Historical Log Summary (Last 15 Records)</h3>
+        <h3 class="text-sm font-extrabold text-slate-800 mb-3 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4 text-indigo-600 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+            Historical Log Summary (Last 15 Records)
+        </h3>
         <table class="w-full text-left text-xs border-collapse">
             <thead>
                 <tr class="bg-slate-100 text-slate-600 uppercase text-[10px] tracking-wider font-black">

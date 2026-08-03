@@ -100,10 +100,10 @@ class ChecklistController extends Controller
                     'current_plan_day_number' => 1,
                 ]);
 
-                return redirect()->route('plans.index')->with('success', '🎉 AMAZING! You have completed the entire multi-day diet blueprint! +500 Bonus Points Logged!');
+                return redirect()->route('plans.index')->with('success', 'AMAZING! You have completed the entire multi-day diet blueprint! +500 Bonus Points Logged!');
             }
         }
 
-        return redirect()->back()->with('success', '🎉 Day Finalized! +20 Points secured and your active plan has advanced to the next checkpoint!');
+        return redirect()->back()->with('success', 'Day Finalized! +20 Points secured and your active plan has advanced to the next checkpoint!');
     }
 }

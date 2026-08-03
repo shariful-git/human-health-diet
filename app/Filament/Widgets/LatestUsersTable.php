@@ -12,7 +12,7 @@ class LatestUsersTable extends TableWidget
 {
     protected int|string|array $columnSpan = 'md';
 
-    protected static ?string $heading = 'ℹ️ Latest Registered Users';
+    protected static ?string $heading = 'Latest Registered Users';
 
     public function table(Table $table): Table
     {

@@ -71,7 +71,7 @@ class MealController extends Controller
         $totalCalories = MealLog::where('user_id', $user->id)->where('date', $today)->sum('calculated_calories');
         DailyLog::where('user_id', $user->id)->where('date', $today)->update(['total_calories_intake' => $totalCalories]);
 
-        return redirect()->route('meals.index')->with('success', "🎉 Added {$planFood->food->name} to your daily intake!");
+        return redirect()->route('meals.index')->with('success', "Added {$planFood->food->name} to your daily intake!");
     }
 
     public function destroy($id)

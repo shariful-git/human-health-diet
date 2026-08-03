@@ -3,7 +3,8 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
                 <h2 class="font-extrabold text-xl text-slate-900 tracking-tight flex items-center gap-2">
-                    💪 Fitness Workouts & Water Hydration
+                    <svg class="w-6 h-6 text-amber-500 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    Fitness Workouts & Water Hydration
                 </h2>
                 <p class="text-xs font-semibold text-slate-500 mt-0.5">Track daily liquid intake goals and workout energy burn.</p>
             </div>
@@ -18,8 +19,8 @@
                 <div>
                     <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl font-bold shadow-xs">
-                                💧
+                            <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center font-bold shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
                             </div>
                             <div>
                                 <h3 class="text-base font-extrabold text-slate-900">Hydration Journal</h3>
@@ -53,7 +54,8 @@
                         <input type="hidden" name="amount" value="250">
                         <button type="submit"
                             class="w-full bg-cyan-50 hover:bg-cyan-100/80 text-cyan-700 font-extrabold py-3.5 px-4 rounded-xl transition-all duration-200 text-center text-xs border border-cyan-200/60 flex items-center justify-center gap-1.5 shadow-2xs hover:scale-105">
-                            <span>💧 +250ml Glass</span>
+                            <svg class="w-4 h-4 text-cyan-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
+                            <span>+250ml Glass</span>
                         </button>
                     </form>
 
@@ -62,7 +64,8 @@
                         <input type="hidden" name="amount" value="500">
                         <button type="submit"
                             class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-extrabold py-3.5 px-4 rounded-xl transition-all duration-200 text-center text-xs flex items-center justify-center gap-1.5 shadow-md shadow-cyan-600/20 hover:scale-105">
-                            <span>🍾 +500ml Bottle</span>
+                            <svg class="w-4 h-4 text-white shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L5.6 15.12a2 2 0 00-1.022.547l-1.028 1.028A2 2 0 003 18.107V20a2 2 0 002 2h14a2 2 0 002-2v-1.893a2 2 0 00-.572-1.414l-1.028-1.028zM12 2v4m-3-2h6"/></svg>
+                            <span>+500ml Bottle</span>
                         </button>
                     </form>
 
@@ -71,7 +74,8 @@
                         <input type="hidden" name="amount" value="-250">
                         <button type="submit"
                             class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-extrabold py-3.5 px-4 rounded-xl transition-all duration-200 text-center text-xs flex items-center justify-center gap-1.5 border border-slate-200 hover:scale-105">
-                            <span>↩️ Undo 250ml</span>
+                            <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
+                            <span>Undo 250ml</span>
                         </button>
                     </form>
                 </div>
@@ -81,8 +85,8 @@
             <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300 space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl font-bold shadow-xs">
-                            🏃‍♂️
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold shadow-xs">
+                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                         </div>
                         <div>
                             <h3 class="text-base font-extrabold text-slate-900">Workout Activity Logger</h3>
@@ -142,8 +146,8 @@
                                     <form action="{{ route('fitness.exercise.destroy', $log->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-slate-300 hover:text-rose-500 hover:bg-rose-50 p-1.5 rounded-lg transition-colors" title="Remove Activity">
-                                            ✕
+                                        <button type="submit" class="text-slate-300 hover:text-rose-500 hover:bg-rose-50 p-1.5 rounded-lg transition-colors flex items-center justify-center" title="Remove Activity">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                                         </button>
                                     </form>
                                 </div>

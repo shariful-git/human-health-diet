@@ -3,7 +3,8 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h2 class="font-extrabold text-xl text-slate-900 tracking-tight flex items-center gap-2">
-                    📊 Weekly Analytics & Visual Reports
+                    <svg class="w-6 h-6 text-emerald-600 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"/></svg>
+                    Weekly Analytics & Visual Reports
                 </h2>
                 <p class="text-xs font-semibold text-slate-500 mt-0.5">Metabolic trends, calorie balance, and hydration data (Past 7 Days).</p>
             </div>
@@ -30,8 +31,8 @@
                 <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl font-bold shadow-2xs">
-                                🔥
+                            <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold shadow-2xs">
+                                <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 1-4 4-6 1.236 1.6 3.5 4.6 3.5 7.5 0 1.268-.396 2.37-1.071 3.238.455.518.728 1.192.728 1.919z"/></svg>
                             </div>
                             <div>
                                 <h3 class="text-base font-extrabold text-slate-900">Calorie Balance Matrix</h3>
@@ -48,8 +49,8 @@
                 <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl font-bold shadow-2xs">
-                                💧
+                            <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center font-bold shadow-2xs">
+                                <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
                             </div>
                             <div>
                                 <h3 class="text-base font-extrabold text-slate-900">Volumetric Hydration Trend</h3>
