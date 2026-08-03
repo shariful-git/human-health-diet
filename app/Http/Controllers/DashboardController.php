@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
 
-        if (! $profile) {
+        if (!$profile) {
             return redirect()->route('profile.edit')->with('info', 'Please complete your health profile first!');
         }
 
