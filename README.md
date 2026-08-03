@@ -1,58 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🥗 Human Health & Diet
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, full-featured web application for tracking nutrition, daily meals, fitness activities, hydration, and diet plans. Built with **Laravel 13**, **Filament v5**, **Tailwind CSS**, and **Alpine.js**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 📊 **Interactive Dashboard**: Monitor daily caloric & macronutrient progress, hydration levels, active streaks, and earned reward points.
+- 🥗 **Meal & Nutrition Tracking**: Log daily meals from a comprehensive food database or custom entries with real-time calorie and macro (protein, carbs, fat) calculations.
+- 🏋️ **Fitness & Hydration Tracker**: Log workout sessions, duration, and calories burned alongside daily water intake.
+- 📅 **Custom Diet & Workout Plans**: Browse preset diet plans or create personalized multi-day meal plans with custom food assignments and enrollment tracking.
+- ✅ **Daily Checklist & Rewards**: Stay consistent with a daily completion checklist, streak counters, and reward points to keep users motivated.
+- 📈 **Analytics & Health Reports**: Generate health progress reports with seamless **CSV** and **PDF** export options.
+- ⚙️ **Filament Admin Panel**: Powerful administrative backend to manage food databases, exercise catalogs, users, and global diet plans.
+- 🔐 **Authentication & User Management**: Secure registration, email verification, and customizable user profile settings powered by Laravel Breeze.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🛠️ Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Layer | Technology |
+| :--- | :--- |
+| **Backend Framework** | [Laravel 13](https://laravel.com) (PHP 8.3+) |
+| **Admin Panel** | [Filament v5](https://filamentphp.com) |
+| **Authentication** | [Laravel Breeze](https://laravel.com/docs/starter-kits#laravel-breeze) |
+| **Frontend Framework** | Blade templates, [Alpine.js](https://alpinejs.dev) |
+| **Styling & Assets** | [Tailwind CSS](https://tailwindcss.com), [Vite](https://vitejs.dev) |
+| **Database** | MySQL / PostgreSQL / SQLite |
+| **Testing & Quality** | PHPUnit, Laravel Pint |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 🚀 Getting Started
 
-## Agentic Development
+### Prerequisites
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Ensure your environment meets the following requirements:
+- **PHP** `>= 8.3` with required extensions (`mbstring`, `pdo`, `openssl`, `tokenizer`, `xml`, `cURL`)
+- **Composer** `>= 2.x`
+- **Node.js** `>= 18.x` & **npm**
+- **Database**: MySQL, PostgreSQL, or SQLite
+
+---
+
+### Installation Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/shariful-git/human-health-diet.git
+   cd human-health-diet
+   ```
+
+2. **Install PHP dependencies**:
+   ```bash
+   composer install
+   ```
+
+3. **Install Node dependencies**:
+   ```bash
+   npm install
+   ```
+
+4. **Configure Environment File**:
+   Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   Generate the application encryption key:
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Configure Database & Run Migrations**:
+   Update your database credentials in `.env`:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=human_health_diet
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+   Execute database migrations along with initial seeders (seeds exercise and food catalog data):
+   ```bash
+   php artisan migrate --seed
+   ```
+
+6. **Create an Admin User (Optional for Filament Panel)**:
+   ```bash
+   php artisan make:filament-user
+   ```
+
+---
+
+## 💻 Development & Execution
+
+Run the complete local development environment (Laravel server, Vite asset builder, queue worker, and log listener concurrently):
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer run dev
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Alternatively, you can run services individually:
 
-## Contributing
+- **Laravel Dev Server**: `php artisan serve`
+- **Vite Hot-Reload**: `npm run dev`
+- **Queue Listener**: `php artisan queue:listen`
+- **Laravel Pail Logs**: `php artisan pail`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Application URLs
 
-## Code of Conduct
+- **User Web Application**: [http://localhost:8000](http://localhost:8000)
+- **Filament Admin Panel**: [http://localhost:8000/admin](http://localhost:8000/admin)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🧪 Testing & Code Quality
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run tests using PHPUnit:
+```bash
+composer test
+```
+*or*
+```bash
+php artisan test
+```
 
-## License
+Format code using Laravel Pint:
+```bash
+./vendor/bin/pint
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 📁 Key Project Structure
+
+```text
+human-health-diet/
+├── app/
+│   ├── Filament/        # Filament admin panel resources, pages, and widgets
+│   ├── Http/
+│   │   └── Controllers/ # Application controllers (Meals, Fitness, Plans, Reports, etc.)
+│   ├── Models/          # Eloquent models (User, Profile, Food, MealLog, Exercise, Plan, etc.)
+│   └── Services/        # Business logic services
+├── database/
+│   ├── migrations/      # Database table schema definitions
+│   └── seeders/         # Food & Exercise default data seeders
+├── resources/
+│   ├── views/           # Blade templates and dashboard layouts
+│   └── css/             # Tailwind CSS styles
+├── routes/
+│   ├── web.php          # Web routes & authentication endpoints
+│   └── auth.php         # Breeze authentication routes
+└── tests/               # Feature and Unit test suites
+```
+
+---
+
+## 📄 License
+
+This application is open-source software licensed under the [MIT License](LICENSE).
