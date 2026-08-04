@@ -7,6 +7,7 @@ use App\Http\Controllers\MealController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TerminalController;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,9 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::delete('/plans/custom/{id}', [PlanController::class, 'destroy'])->name('plans.custom.destroy');
     Route::post('/plans/day/{dayId}/add-food', [PlanController::class, 'addFoodToDay'])->name('plans.day.addFood');
     Route::delete('/plans/day-food/{itemId}', [PlanController::class, 'removeFoodFromDay'])->name('plans.day.removeFood');
+
+    Route::get('/terminal', [TerminalController::class, 'index'])->name('terminal.index');
+    Route::post('/terminal/execute', [TerminalController::class, 'execute'])->name('terminal.execute');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
