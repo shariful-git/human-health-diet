@@ -28,16 +28,19 @@ class AuditLogsTable
                         'logout' => 'gray',
                         'failed_login' => 'danger',
                         'password_reset' => 'warning',
+                        'page_visit' => 'primary',
                         default => 'gray',
                     })
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('subject_label')
-                    ->label('Target Subject')
+                    ->label('Target Subject / Page')
                     ->searchable(query: function ($query, string $search) {
                         return $query->where('auditable_type', 'like', "%{$search}%")
-                            ->orWhere('auditable_id', 'like', "%{$search}%");
+                            ->orWhere('auditable_id', 'like', "%{$search}%")
+                            ->orWhere('url', 'like', "%{$search}%")
+                            ->orWhere('new_values', 'like', "%{$search}%");
                     }),
 
                 TextColumn::make('user_name')
@@ -49,7 +52,12 @@ class AuditLogsTable
 
                 TextColumn::make('tags')
                     ->badge()
-                    ->color('secondary')
+                    ->color(fn (string $state): string => match ($state) {
+                        'visit' => 'primary',
+                        'auth' => 'info',
+                        'security' => 'danger',
+                        default => 'secondary',
+                    })
                     ->sortable(),
 
                 TextColumn::make('ip_address')
@@ -65,6 +73,7 @@ class AuditLogsTable
             ->filters([
                 SelectFilter::make('event')
                     ->options([
+                        'page_visit' => 'Page Visit',
                         'created' => 'Created',
                         'updated' => 'Updated',
                         'deleted' => 'Deleted',
@@ -76,6 +85,7 @@ class AuditLogsTable
 
                 SelectFilter::make('tags')
                     ->options([
+                        'visit' => 'Portal Visits',
                         'model' => 'Model Data',
                         'auth' => 'Authentication',
                         'security' => 'Security',

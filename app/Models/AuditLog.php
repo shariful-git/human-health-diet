@@ -69,6 +69,11 @@ class AuditLog extends Model
      */
     public function getSubjectLabelAttribute(): string
     {
+        if ($this->event === 'page_visit') {
+            $path = $this->new_values['path'] ?? parse_url($this->url, PHP_URL_PATH) ?? 'Portal';
+            return "Page Visit: {$path}";
+        }
+
         if (!$this->auditable_type) {
             return 'N/A';
         }
