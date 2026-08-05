@@ -4,7 +4,7 @@
             <div>
                 <h2 class="font-extrabold text-xl text-slate-900 tracking-tight flex items-center gap-2">
                     <svg class="w-6 h-6 text-emerald-600 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                    Food Database & Personal Items (ফুড ক্যাটালগ)
+                    Food Database & Personal Items
                 </h2>
                 <p class="text-xs font-semibold text-slate-500 mt-0.5">Explore global system food database or add custom food items for your personal diet plan.</p>
             </div>
@@ -13,7 +13,7 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
-                <span>Add Custom Food Item (নিজের ফুড যুক্ত করুন)</span>
+                <span>Add Custom Food Item</span>
             </a>
         </div>
     </x-slot>
@@ -31,7 +31,7 @@
             <div class="lg:col-span-6 space-y-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <h3 class="text-base font-extrabold text-slate-900">My Personal Foods (আমার ফুড সমুহ)</h3>
+                        <h3 class="text-base font-extrabold text-slate-900">My Personal Foods</h3>
                         <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black uppercase px-2 py-0.5 rounded-full">Personal</span>
                     </div>
                     <span class="text-xs font-bold text-slate-400 font-mono">{{ $myFoods->count() }} Items</span>
@@ -112,7 +112,7 @@
             <div class="lg:col-span-6 space-y-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <h3 class="text-base font-extrabold text-slate-900">Global Admin Foods (সিস্টেমের খাবার)</h3>
+                        <h3 class="text-base font-extrabold text-slate-900">Global Admin Foods</h3>
                         <span class="bg-emerald-100 text-emerald-700 text-[10px] font-black uppercase px-2 py-0.5 rounded-full">Available to All</span>
                     </div>
                     <span class="text-xs font-bold text-slate-400 font-mono">{{ $globalFoods->count() }} Items</span>
