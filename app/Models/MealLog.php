@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class MealLog extends Model
 {
+    use Auditable;
+
     protected $fillable = ['user_id', 'food_id', 'date', 'meal_type', 'servings', 'calculated_calories', 'status'];
 
     public function food()

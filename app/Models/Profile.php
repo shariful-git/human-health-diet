@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Services\HealthCalculator;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    use Auditable;
+
     protected $fillable = ['user_id', 'gender', 'age', 'height', 'weight', 'activity_level', 'goal', 'daily_calorie_target', 'bmi', 'bmr', 'tdee', 'medical_conditions'];
 
     protected $casts = [

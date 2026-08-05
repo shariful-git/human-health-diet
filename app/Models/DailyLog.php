@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class DailyLog extends Model
 {
+    use Auditable;
+
     protected $fillable = ['user_id', 'date', 'total_calories_intake', 'total_calories_burn', 'water_intake_ml', 'sleep_hours', 'weight_kg', 'steps', 'mood', 'is_completed'];
 
     public function user()

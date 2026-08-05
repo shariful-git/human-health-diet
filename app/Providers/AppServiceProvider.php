@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Illuminate\Support\Facades\Event::listen([
+            \Illuminate\Auth\Events\Login::class,
+            \Illuminate\Auth\Events\Logout::class,
+            \Illuminate\Auth\Events\Failed::class,
+            \Illuminate\Auth\Events\PasswordReset::class,
+        ], \App\Listeners\AuditAuthEventsListener::class);
     }
 }

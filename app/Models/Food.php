@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class Food extends Model
 {
+    use Auditable;
+
     protected $table = 'foods';
 
     protected $fillable = ['user_id', 'name', 'category', 'calories', 'protein', 'carbohydrate', 'fat', 'fiber', 'sugar', 'sodium', 'vitamins', 'minerals', 'serving_size', 'is_admin_approved'];

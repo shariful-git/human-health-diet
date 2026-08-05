@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class ExerciseLog extends Model
 {
+    use Auditable;
+
     protected $fillable = ['daily_log_id', 'exercise_id', 'duration_minutes', 'calculated_calories_burn', 'is_completed'];
 
     public function exercise()
