@@ -15,6 +15,10 @@ class FoodInfolist
             ->components([
                 Grid::make(2)
                     ->schema([
+                        TextEntry::make('user.name')
+                            ->label('Owner')
+                            ->badge(),
+
                         TextEntry::make('name')
                             ->label('Food Name'),
 

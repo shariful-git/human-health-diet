@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Food\Schemas;
 
+use App\Models\User;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -12,10 +13,17 @@ class FoodForm
 {
     public static function configure(Schema $schema): Schema
     {
+        $users = User::pluck('name', 'id')->toArray();
         return $schema
             ->components([
                 Grid::make(2)
                     ->schema([
+                        Select::make('user_id')
+                            ->label('Owner')
+                            ->options($users)
+                            ->searchable()
+                            ->required(),
+
                         TextInput::make('name')
                             ->label('Food Name')
                             ->required()
