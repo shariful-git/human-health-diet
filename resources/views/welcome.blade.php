@@ -53,7 +53,7 @@
                     @else
                         <a href="{{ route('login') }}"
                             class="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-300 hover:text-white transition-colors px-2.5 sm:px-4 py-2">
-                            SIGNIN
+                            LOGIN
                         </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
