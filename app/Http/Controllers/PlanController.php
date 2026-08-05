@@ -6,6 +6,7 @@ use App\Models\Food;
 use App\Models\Plan;
 use App\Models\PlanDay;
 use App\Models\PlanDayFood;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -70,7 +71,11 @@ class PlanController extends Controller
             ->with('days.planFoods.food')
             ->findOrFail($id);
 
-        $allFoods = Food::all();
+        $adminUserIds = User::where('is_admin', 1)->pluck('id', 'id')->toArray();
+
+        $userIds = array_merge([Auth::id()], $adminUserIds);
+
+        $allFoods = Food::availableForUser($userIds)->get();
 
         return view('plans.edit-days', compact('plan', 'allFoods'));
     }

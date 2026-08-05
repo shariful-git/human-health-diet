@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FitnessActivityController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
@@ -22,6 +23,13 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::match(['put', 'patch'], '/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/foods', [FoodController::class, 'index'])->name('foods.index');
+    Route::get('/foods/create', [FoodController::class, 'create'])->name('foods.create');
+    Route::post('/foods', [FoodController::class, 'store'])->name('foods.store');
+    Route::get('/foods/{id}/edit', [FoodController::class, 'edit'])->name('foods.edit');
+    Route::put('/foods/{id}', [FoodController::class, 'update'])->name('foods.update');
+    Route::delete('/foods/{id}', [FoodController::class, 'destroy'])->name('foods.destroy');
 
     Route::get('/meals', [MealController::class, 'index'])->name('meals.index');
     Route::match(['get', 'post'], '/meals/log-plan/{planFoodId}', [MealController::class, 'logFromPlan'])->name('meals.log.plan');

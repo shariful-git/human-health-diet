@@ -52,6 +52,12 @@ class FoodTable
                     ->label('Serving')
                     ->sortable(),
 
+                TextColumn::make('user.name')
+                    ->label('Owner')
+                    ->default('Global (Admin)')
+                    ->badge()
+                    ->color(fn ($record) => $record->user_id ? 'info' : 'success'),
+
                 IconColumn::make('is_admin_approved')
                     ->label('Approved')
                     ->boolean(),
