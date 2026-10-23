@@ -1,53 +1,58 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-extrabold text-xl text-slate-900 tracking-tight flex items-center gap-2">
-                <svg class="w-6 h-6 text-indigo-600 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                Initialize Custom Challenge Blueprint
-            </h2>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-xs font-medium text-slate-500">Diet Plans</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                        New Plan
+                    </span>
+                </div>
+                <h2 class="text-xl font-semibold text-slate-900 tracking-tight">
+                    Create Custom Plan
+                </h2>
+                <p class="text-xs text-slate-500 mt-0.5">Set up a customized meal plan with specific day durations.</p>
+            </div>
             <a href="{{ route('plans.index') }}"
-                class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold px-4 py-2 rounded-xl transition-all hover:scale-105 inline-flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                <span>Back to Plans</span>
+                class="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium px-3.5 py-2 rounded-md border border-slate-300 shadow-2xs transition">
+                <span>← Back to Plans</span>
             </a>
         </div>
     </x-slot>
 
-    <div class="py-12 max-w-xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-300">
-            <div class="flex items-center gap-3.5 mb-6 pb-4 border-b border-slate-100">
-                <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold shadow-2xs">
-                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-                </div>
-                <div>
-                    <h3 class="text-lg font-extrabold text-slate-900">Custom Plan Generator</h3>
-                    <p class="text-xs text-slate-500 font-medium">Define duration and title for your tailored routine.</p>
-                </div>
+    <div class="py-6 max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-2xs space-y-5">
+            <div class="border-b border-slate-100 pb-3">
+                <h3 class="text-sm font-semibold text-slate-900">Plan Details</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Choose a title and cycle duration for your diet schedule.</p>
             </div>
 
-            <form action="{{ route('plans.custom.store') }}" method="POST" class="space-y-5">
+            <form action="{{ route('plans.custom.store') }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
-                    <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">Plan Blueprint Title</label>
-                    <input type="text" name="name" required placeholder="e.g., Summer Shredding Blueprint"
-                        class="block w-full rounded-xl border-slate-200 text-xs font-semibold text-slate-800 shadow-2xs focus:border-indigo-500 focus:ring-indigo-500 py-3">
+                    <label class="block text-xs font-medium text-slate-700 mb-1.5">Plan Name *</label>
+                    <input type="text" name="name" required placeholder="e.g. 7-Day High Protein Schedule"
+                        class="block w-full rounded-md border-slate-300 text-xs text-slate-800 focus:border-emerald-600 focus:ring-emerald-600 py-2 px-3">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">Duration Challenge Cycle</label>
+                    <label class="block text-xs font-medium text-slate-700 mb-1.5">Duration *</label>
                     <select name="duration_days"
-                        class="block w-full rounded-xl border-slate-200 text-xs font-semibold text-slate-800 shadow-2xs focus:border-indigo-500 focus:ring-indigo-500 py-3">
-                        <option value="7">7 Days Micro-Cycle Challenge</option>
-                        <option value="15">15 Days Sprint Transformation</option>
-                        <option value="30">30 Days Standard Metabolic Reset</option>
+                        class="block w-full rounded-md border-slate-300 text-xs text-slate-800 focus:border-emerald-600 focus:ring-emerald-600 py-2 px-3">
+                        <option value="7">7 Days Plan</option>
+                        <option value="15">15 Days Plan</option>
+                        <option value="30">30 Days Plan</option>
                     </select>
                 </div>
 
-                <button type="submit"
-                    class="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold h-12 rounded-xl mt-4 shadow-sm transition-all text-xs flex items-center justify-center gap-2 hover:scale-[1.01]">
-                    <span>Initialize Plan Generator & Setup Days</span>
-                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </button>
+                <div class="pt-2">
+                    <button type="submit"
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-md shadow-2xs transition text-xs flex items-center justify-center gap-1.5">
+                        <span>Create Plan & Setup Days</span>
+                        <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
             </form>
         </div>
     </div>

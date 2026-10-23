@@ -4,61 +4,54 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Human Health & Diet') }} — Enterprise Metabolic & Dietary Platform</title>
+    <title>{{ config('app.name', 'Human Health & Diet') }} — Nutrition & Health Tracker</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        body {
-            font-family: 'Ubuntu', sans-serif;
-        }
-    </style>
 </head>
 
-<body class="antialiased bg-slate-900 text-slate-100 selection:bg-emerald-500 selection:text-white overflow-x-hidden min-h-screen flex flex-col">
+<body class="antialiased bg-slate-50 text-slate-800 selection:bg-emerald-600 selection:text-white min-h-screen flex flex-col font-sans">
 
-    <!-- Ambient Glow background elements -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 sm:left-1/3 sm:translate-x-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-emerald-600/15 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none -z-10"></div>
-    <div class="fixed bottom-0 right-0 sm:right-1/4 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-teal-600/15 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none -z-10"></div>
-
-    <!-- Header Navigation -->
-    <nav class="w-full bg-slate-900/80 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center gap-2">
+    <!-- Top Navigation -->
+    <nav class="w-full bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
             
-            <!-- Corporate Identity -->
-            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-none bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-                    </svg>
-                </div>
-                <span class="font-extrabold text-sm sm:text-lg tracking-tight text-white">
-                    HUMAN HEALTH <span class="text-emerald-400 font-black">DIET</span>
+            <!-- Brand -->
+            <a href="/" class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-md bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shadow-2xs">
+                    HD
+                </span>
+                <span class="font-semibold text-base text-slate-900 tracking-tight">
+                    Human Health Diet
                 </span>
             </a>
 
             <!-- Navigation Controls -->
-            <div class="flex items-center gap-2 sm:gap-4">
+            <div class="flex items-center gap-3">
                 @if (Route::has('login'))
                     @auth
                         <a href="{{ url('/dashboard') }}"
-                            class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-emerald-600 text-white px-3.5 sm:px-5 h-9 sm:h-11 inline-flex items-center rounded-none hover:bg-emerald-500 transition-all shadow-md shadow-emerald-600/20">
-                            DASHBOARD →
+                            class="text-xs font-medium bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md transition border border-transparent shadow-2xs inline-flex items-center gap-1.5">
+                            <span>Open Dashboard</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                         </a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-slate-300 hover:text-white transition-colors px-2.5 sm:px-4 py-2">
-                            LOGIN
+                            class="text-xs font-medium text-slate-600 hover:text-slate-900 px-3 py-1.5 transition">
+                            Sign In
                         </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider bg-emerald-600 text-white px-3.5 sm:px-5 h-9 sm:h-11 inline-flex items-center rounded-none hover:bg-emerald-500 transition-all shadow-md shadow-emerald-600/20">
-                                REGISTER
+                                class="text-xs font-medium bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-md transition shadow-2xs border border-transparent">
+                                Get Started
                             </a>
                         @endif
                     @endauth
@@ -67,162 +60,183 @@
         </div>
     </nav>
 
-    <!-- Main Hero Section -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-16 sm:pb-24 lg:pt-24 lg:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 items-center relative">
-        
-        <!-- Left Content Column -->
-        <div class="lg:col-span-6 space-y-6 sm:space-y-8 text-center lg:text-left">
-            <div class="inline-flex items-center gap-2 bg-slate-800/90 border border-slate-700 text-slate-300 px-3 sm:px-4 py-1.5 rounded-full text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase shadow-xs max-w-full truncate">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-                <span class="truncate">Metabolic Intelligence Engine v4.2 Stable</span>
-            </div>
+    <!-- Main Hero -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Info Column -->
+            <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1 rounded text-xs font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    <span>Daily Nutrition & Health Tracking</span>
+                </div>
 
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15] sm:leading-[1.1]">
-                The analytical platform for 
-                <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent block mt-1">
-                    metabolic control.
-                </span>
-            </h1>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+                    Track your diet, nutrition, and daily habits with clarity.
+                </h1>
 
-            <p class="text-sm sm:text-base lg:text-lg text-slate-400 leading-relaxed font-normal max-w-xl mx-auto lg:mx-0">
-                {{ config('app.name') }} abstracts the complexity of human nutrition. Synthesize real-time biometric inputs, execute automated dynamic energy expenditure projections, and audit systemic cellular hydration thresholds.
-            </p>
+                <p class="text-base text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    A simple and structured tool to calculate daily calorie targets, log meals, track water intake, and stay consistent with healthy routines.
+                </p>
 
-            <div class="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 w-full">
-                @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-extrabold uppercase tracking-wider px-8 h-12 inline-flex items-center justify-center rounded-none shadow-lg shadow-emerald-600/25 hover:from-emerald-500 hover:to-teal-500 transition-all">
-                        Launch Your Dynamic Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('register') }}"
-                        class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-extrabold uppercase tracking-wider px-8 h-12 inline-flex items-center justify-center rounded-none shadow-lg shadow-emerald-600/25 hover:from-emerald-500 hover:to-teal-500 transition-all">
-                        REGISTER
-                    </a>
-                    <a href="{{ route('login') }}"
-                        class="w-full sm:w-auto bg-slate-800/80 border border-slate-700 text-slate-200 text-xs font-extrabold uppercase tracking-wider px-8 h-12 inline-flex items-center justify-center rounded-none hover:bg-slate-700 hover:text-white transition-all">
-                        LOGIN
-                    </a>
-                @endauth
-            </div>
-        </div>
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 pt-2">
+                    @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium px-5 py-2.5 rounded-md transition shadow-2xs inline-flex items-center justify-center gap-1.5">
+                            <span>Go to Dashboard</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                    @else
+                        <a href="{{ route('register') }}"
+                            class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium px-5 py-2.5 rounded-md transition shadow-2xs inline-flex items-center justify-center gap-1.5">
+                            <span>Create Free Account</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="{{ route('login') }}"
+                            class="bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 text-xs font-medium px-5 py-2.5 rounded-md transition shadow-2xs inline-flex items-center justify-center">
+                            Sign In
+                        </a>
+                    @endauth
+                </div>
 
-        <!-- Right Diagnostic Preview Column -->
-        <div class="lg:col-span-6 relative w-full">
-            <div class="relative bg-slate-800/90 backdrop-blur-2xl rounded-none shadow-2xl border border-slate-700/80 p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 overflow-hidden">
-                <div class="absolute -top-16 -right-16 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
-
-                <!-- Clinical Header View -->
-                <div class="flex flex-row items-center justify-between border-b border-slate-700/60 pb-4 sm:pb-5 gap-2">
-                    <div class="space-y-1">
-                        <div class="flex items-center gap-1.5 sm:gap-2">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-                            <p class="text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-slate-400">Total System Energy Matrix</p>
-                        </div>
-                        <div class="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
-                            <span class="text-2xl sm:text-4xl font-black text-white tracking-tight font-mono">1,940</span>
-                            <span class="text-[10px] sm:text-xs font-bold text-emerald-400 uppercase tracking-wider">kcal / total exp</span>
-                        </div>
+                <!-- Proof points -->
+                <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 max-w-md mx-auto lg:mx-0 text-left">
+                    <div>
+                        <div class="text-xl font-semibold text-slate-900 font-mono">BMR & TDEE</div>
+                        <div class="text-xs text-slate-500 mt-0.5">Calculated from metrics</div>
                     </div>
                     <div>
-                        <span class="inline-flex items-center gap-1 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[9px] sm:text-[10px] font-black tracking-wider uppercase px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full shrink-0 shadow-xs">
-                            <svg class="w-3 h-3 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                            <span class="hidden xs:inline">Optimal</span> Curve
+                        <div class="text-xl font-semibold text-slate-900 font-mono">2,500+</div>
+                        <div class="text-xs text-slate-500 mt-0.5">Food database items</div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-semibold text-slate-900 font-mono">PDF & CSV</div>
+                        <div class="text-xs text-slate-500 mt-0.5">Exportable reports</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Box-Type Preview Panel -->
+            <div class="lg:col-span-6 w-full">
+                <div class="bg-white rounded-lg border border-slate-200 p-6 shadow-2xs space-y-5">
+                    
+                    <!-- Box Header -->
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                        <div>
+                            <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Today's Summary</span>
+                            <div class="flex items-baseline gap-2 mt-0.5">
+                                <span class="text-2xl font-semibold text-slate-900 font-mono">1,820</span>
+                                <span class="text-xs text-slate-500 font-medium">/ 2,150 kcal goal</span>
+                            </div>
+                        </div>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            On Track
                         </span>
                     </div>
-                </div>
 
-                <!-- Live Metrics Array -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                    <!-- Data Block 1 -->
-                    <div class="p-3.5 sm:p-4 rounded-none border border-slate-700/60 bg-slate-900/80 space-y-2.5 sm:space-y-3 hover:border-slate-600 transition-colors">
-                        <div class="flex justify-between items-center">
-                            <span class="text-[10px] sm:text-[11px] font-extrabold tracking-wider text-slate-300 uppercase">Micronutrient Audit</span>
-                            <span class="text-xs font-black text-emerald-400 font-mono">72.4%</span>
+                    <!-- Calorie Progress -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs text-slate-600 font-medium">
+                            <span>Daily Calorie Budget</span>
+                            <span class="font-mono">85%</span>
                         </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden p-0.5 border border-slate-700/50">
-                            <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-500" style="width: 72.4%"></div>
+                        <div class="w-full bg-slate-100 rounded h-2.5 overflow-hidden">
+                            <div class="bg-emerald-600 h-full rounded" style="width: 85%"></div>
                         </div>
-                        <p class="text-[10px] text-slate-400 font-medium">Trace values match optimized macro profiles.</p>
                     </div>
 
-                    <!-- Data Block 2 -->
-                    <div class="p-3.5 sm:p-4 rounded-none border border-slate-700/60 bg-slate-900/80 space-y-2.5 sm:space-y-3 hover:border-slate-600 transition-colors">
-                        <div class="flex justify-between items-center">
-                            <span class="text-[10px] sm:text-[11px] font-extrabold tracking-wider text-slate-300 uppercase">Volumetric Hydration</span>
-                            <span class="text-xs font-black text-cyan-400 font-mono">75.0%</span>
+                    <!-- Macro Cards Box -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
+                            <span class="text-[10px] font-medium uppercase text-slate-500 tracking-wider block">Protein</span>
+                            <span class="text-base font-semibold text-slate-800 font-mono mt-0.5 block">135g</span>
                         </div>
-                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden p-0.5 border border-slate-700/50">
-                            <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full rounded-full transition-all duration-500" style="width: 75%"></div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
+                            <span class="text-[10px] font-medium uppercase text-slate-500 tracking-wider block">Carbs</span>
+                            <span class="text-base font-semibold text-slate-800 font-mono mt-0.5 block">195g</span>
                         </div>
-                        <p class="text-[10px] text-slate-400 font-medium">2,250ml verified / 3,000ml baseline target.</p>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
+                            <span class="text-[10px] font-medium uppercase text-slate-500 tracking-wider block">Fats</span>
+                            <span class="text-base font-semibold text-slate-800 font-mono mt-0.5 block">48g</span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Live Status Footer -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between text-[10px] sm:text-[11px] bg-slate-950/90 p-3.5 sm:p-4 rounded-none border border-slate-800/80 font-mono gap-1.5 sm:gap-2">
-                    <span class="flex items-center gap-2 text-slate-300">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping shrink-0"></span>
-                        <span class="truncate">METABOLIC STREAK: 05 CYCLES SECURED</span>
-                    </span>
-                    <span class="text-emerald-400 font-black tracking-wider shrink-0">+120 INDEX PTS</span>
-                </div>
+                    <!-- Hydration & Streak Row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <div class="p-3 rounded border border-slate-200 bg-slate-50 space-y-1.5">
+                            <div class="flex justify-between text-xs font-medium text-slate-700">
+                                <span>Water Intake</span>
+                                <span class="font-mono text-sky-700 font-semibold">2,200 ml</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded h-1.5 overflow-hidden">
+                                <div class="bg-sky-500 h-full rounded" style="width: 75%"></div>
+                            </div>
+                            <span class="text-[10px] text-slate-500 block">Target: 3,000 ml</span>
+                        </div>
 
+                        <div class="p-3 rounded border border-slate-200 bg-slate-50 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-medium uppercase text-slate-500 tracking-wider block">Habit Streak</span>
+                                <span class="text-sm font-semibold text-slate-900 mt-0.5 block">14 Days Active</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-md bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 font-bold text-xs">
+                                ✓
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </div>
     </main>
 
-    <!-- Features Section -->
-    <section class="bg-slate-950 border-t border-slate-800 py-16 sm:py-24 lg:py-32 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Core Features Box Grid -->
+    <section class="bg-white border-t border-slate-200 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
             
-            <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-20 space-y-3">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
-                    Engineered for computational metabolic accuracy.
+            <div class="max-w-2xl mx-auto text-center space-y-2">
+                <span class="text-xs font-semibold uppercase tracking-wider text-emerald-700">Features</span>
+                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900">
+                    Everything you need to manage your daily diet
                 </h2>
-                <p class="text-slate-400 font-medium max-w-xl mx-auto text-xs sm:text-base">
-                    Eliminate human error with structured journal logging and biometric standard modeling.
+                <p class="text-slate-500 text-xs sm:text-sm">
+                    Designed for everyday use with clean interfaces and accurate nutrition tracking.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 <!-- Feature 1 -->
-                <div class="p-6 sm:p-8 rounded-none border border-slate-800 bg-slate-900/50 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 space-y-4">
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-none flex items-center justify-center font-bold">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
-                        </svg>
+                <div class="p-6 rounded-lg border border-slate-200 bg-slate-50 space-y-3">
+                    <div class="w-9 h-9 rounded-md bg-white border border-slate-200 text-emerald-700 flex items-center justify-center font-bold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"/></svg>
                     </div>
-                    <h3 class="text-base font-extrabold text-white tracking-tight">Predictive BMR & TDEE Calculations</h3>
-                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                        Automate baseline metabolic variables utilizing standardized Harris-Benedict formulas mapping dynamic adjustments directly against weight fluctuations.
+                    <h3 class="text-sm font-semibold text-slate-900">Calorie & Macro Goals</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Automatic calorie target calculations based on your height, weight, age, and activity level with custom adjustments for weight loss, maintenance, or gain.
                     </p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="p-6 sm:p-8 rounded-none border border-slate-800 bg-slate-900/50 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 space-y-4">
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 bg-teal-500/10 text-teal-400 border border-teal-500/20 rounded-none flex items-center justify-center font-bold">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
+                <div class="p-6 rounded-lg border border-slate-200 bg-slate-50 space-y-3">
+                    <div class="w-9 h-9 rounded-md bg-white border border-slate-200 text-emerald-700 flex items-center justify-center font-bold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                     </div>
-                    <h3 class="text-base font-extrabold text-white tracking-tight">Granular Macronutrient Auditing</h3>
-                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                        Log accurate molecular profile distributions. Isolate structural proteins, clean complex carbohydrate bonds, saturated limits, and total dietary fibers.
+                    <h3 class="text-sm font-semibold text-slate-900">Meal & Food Logging</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Easily log breakfast, lunch, dinner, and snacks with a searchable food database and automatic calculation of proteins, carbohydrates, and fats.
                     </p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="p-6 sm:p-8 rounded-none border border-slate-800 bg-slate-900/50 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 space-y-4">
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-none flex items-center justify-center font-bold">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
+                <div class="p-6 rounded-lg border border-slate-200 bg-slate-50 space-y-3">
+                    <div class="w-9 h-9 rounded-md bg-white border border-slate-200 text-emerald-700 flex items-center justify-center font-bold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                     </div>
-                    <h3 class="text-base font-extrabold text-white tracking-tight">Automated Verification Engines</h3>
-                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                        Lock in biological parameter checkpoints daily to track operational health integrity markers and unlock daily challenge rewards.
+                    <h3 class="text-sm font-semibold text-slate-900">Habits & Daily Checklists</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Stay accountable with daily hydration tracking, workout logging, customizable checklists, and exportable weekly audit reports.
                     </p>
                 </div>
 
@@ -231,8 +245,17 @@
     </section>
 
     <!-- Footer -->
-    <footer class="text-center py-6 sm:py-8 px-4 text-[10px] sm:text-xs tracking-widest font-extrabold uppercase text-slate-500 bg-slate-950 border-t border-slate-900">
-        &copy; {{ date('Y') }} {{ config('app.name', 'Human Health & Diet') }}. All intellectual properties registered.
+    <footer class="mt-auto py-8 bg-white border-t border-slate-200 text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span>&copy; {{ date('Y') }} {{ config('app.name', 'Human Health & Diet') }}. All rights reserved.</span>
+            </div>
+            <div class="flex items-center gap-5">
+                <a href="{{ route('login') }}" class="hover:text-slate-800 transition-colors">Sign In</a>
+                <a href="{{ route('register') }}" class="hover:text-slate-800 transition-colors">Create Account</a>
+                <a href="{{ route('terminal.index') }}" class="hover:text-slate-800 transition-colors font-mono">Terminal</a>
+            </div>
+        </div>
     </footer>
 
 </body>
