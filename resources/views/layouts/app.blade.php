@@ -21,14 +21,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="font-sans antialiased text-slate-800 min-h-screen flex flex-col app-shell">
     <div class="min-h-screen flex flex-col">
         @include('layouts.navigation')
         <x-toast />
 
         <!-- Page Header -->
         @isset($header)
-            <header class="bg-white border-b border-slate-200">
+            <header class="bg-white/80 backdrop-blur border-b border-slate-200/80">
                 <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -41,7 +41,7 @@
         </main>
 
         <!-- Minimal Footer -->
-        <footer class="mt-auto py-5 bg-white border-t border-slate-200 text-slate-500 text-xs">
+        <footer class="mt-auto py-7 bg-white/70 border-t border-slate-200/80 text-slate-500 text-xs">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
                 <div class="flex items-center gap-2">
                     <span class="font-semibold text-slate-700">{{ config('app.name', 'Human Health & Diet') }}</span>

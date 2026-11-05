@@ -1,21 +1,21 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-slate-200 sticky top-0 z-50">
+<nav x-data="{ open: false }" class="bg-white/90 backdrop-blur-xl border-b border-slate-200/80 sticky top-0 z-50 shadow-[0_1px_12px_rgba(15,23,42,.04)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-15 items-center">
+        <div class="flex justify-between min-h-[4.25rem] items-center">
             <div class="flex items-center gap-8">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5">
-                        <div class="w-7 h-7 rounded bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">
-                            HD
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 text-white font-black text-xs flex items-center justify-center shadow-lg shadow-emerald-600/20">
+                            <span>♥</span>
                         </div>
-                        <span class="font-bold text-sm text-slate-900 tracking-tight">
-                            Human Health <span class="text-emerald-600">Diet</span>
+                        <span class="font-extrabold text-[.9rem] text-slate-900 tracking-tight">
+                            Human Health <span class="text-emerald-600">& Diet</span>
                         </span>
                     </a>
                 </div>
 
                 <!-- Desktop Nav Links -->
-                <div class="hidden md:flex md:items-center md:gap-1">
+                <div class="hidden md:flex md:items-center md:gap-1.5">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
